@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skysoft/screens/home_page.dart';
+import 'package:skysoft/screens/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SkySoft',
-      home: const HomePage(),
+      home: const LoginPage(),
     );
   }
 }
