@@ -1,4 +1,4 @@
-package com.example.skysoft
+package com.foretech.skysoft
 
 import io.flutter.embedding.android.FlutterActivity
 

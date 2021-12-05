@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.skysoft">
+    package="com.foretech.skysoft">
    <application
         android:label="skysoft"
         android:icon="@mipmap/ic_launcher">
