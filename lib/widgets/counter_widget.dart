@@ -3,9 +3,12 @@ import 'package:skysoft/constants/config.dart';
 import 'package:skysoft/widgets/selector_option.dart';
 
 class CounterWidget extends StatefulWidget {
-  final Function? onChange;
+  final VoidCallback? onIncrement;
+  final VoidCallback? onDecrement;
   final TextEditingController? controller;
-  CounterWidget({Key? key, this.onChange, this.controller}) : super(key: key);
+
+  CounterWidget({Key? key, this.onIncrement, this.controller, this.onDecrement})
+      : super(key: key);
 
   @override
   _CounterWidgetState createState() => _CounterWidgetState();
@@ -35,7 +38,10 @@ class _CounterWidgetState extends State<CounterWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _roundedButton(
-                icon: Icons.remove
+                icon: Icons.remove,
+                onTap: () {
+                  widget.onDecrement!();
+                },
               ),
               Container(
                 width: _ac!.rW(30),
@@ -63,7 +69,10 @@ class _CounterWidgetState extends State<CounterWidget> {
                 ),
               ),
               _roundedButton(
-                icon: Icons.add
+                icon: Icons.add,
+                onTap: () {
+                  widget.onIncrement!();
+                },
               ),
             ],
           ),
@@ -72,7 +81,7 @@ class _CounterWidgetState extends State<CounterWidget> {
     );
   }
 
-  Widget _roundedButton({IconData? icon, VoidCallback? onTap }) {
+  Widget _roundedButton({IconData? icon, VoidCallback? onTap}) {
     return GestureDetector(
       onTap: () {
         onTap!();

@@ -15,6 +15,23 @@ class GenerateInvoicePage extends StatefulWidget {
 
 class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
   AppConfig? _ac;
+  int liter = 1;
+  double amount = 0;
+
+  int petrolOne = 100;
+  int petrolTwo = 95;
+  int diesel = 105;
+
+  int selectedItem = 0;
+
+  TextEditingController literController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
+
+  @override
+  void initState() {
+    literController.text = liter.toString();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +67,41 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                 SizedBox(height: _ac!.rHP(1)),
                 CustomSelector(
                   onChange: (val) {
-                    print(val);
+                    WidgetsBinding.instance!
+                        .addPostFrameCallback((timeStamp) {
+                          setState(() {
+                      if (val == 0) {
+                        selectedItem = petrolOne;
+                      } else if (val == 1) {
+                        selectedItem = petrolTwo;
+                      } else {
+                        selectedItem = diesel;
+                      }
+                    });
+                    _calculateTotalAmount();
+                        });
                   },
                 ),
                 Spacer(),
-                CounterWidget(),
+                CounterWidget(
+                  controller: literController,
+                  onIncrement: () {
+                    literController.text =
+                        (int.parse(literController.text) + 1).toString();
+                    _calculateTotalAmount();
+                  },
+                  onDecrement: () {
+                    if (int.parse(literController.text) != 0) {
+                      literController.text =
+                          (int.parse(literController.text) - 1).toString();
+                      _calculateTotalAmount();
+                    }
+                  },
+                ),
                 Spacer(),
-                TitledTextfield(),
+                TitledTextfield(
+                  controller: amountController,
+                ),
                 SizedBox(height: _ac!.rHP(1)),
                 CustomButton(
                   title: "Print Recipt",
@@ -67,5 +112,12 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
         ),
       ),
     );
+  }
+
+  _calculateTotalAmount() {
+    print("Calculated");
+    amountController.text =
+        (selectedItem * int.parse(literController.text)).toString();
+    print(selectedItem.toString());
   }
 }
