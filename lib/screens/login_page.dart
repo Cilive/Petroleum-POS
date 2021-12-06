@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/screens/home_page.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
 import 'package:skysoft/widgets/dropdown_widget.dart';
@@ -19,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     _ac = AppConfig(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
@@ -26,40 +28,22 @@ class _LoginPageState extends State<LoginPage> {
           width: _ac!.rW(100),
           child: Column(
             children: [
-              Container(
-                height: _ac!.rH(85),
-                width: _ac!.rW(100),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color.fromRGBO(40, 150, 209, 1),
-                      Color.fromRGBO(158, 218, 219, 1),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
-                  ),
-                ),
-                child: SafeArea(
-                  child: Column(
-                    children: [
-                      SizedBox(height: _ac!.rH(10)),
-                      _logoSection(),
-                      _pageSection(),
-                      Text(
-                        "Forgot Password?",
-                        style: TextStyle(
+              SafeArea(
+                child: Column(
+                  children: [
+                    SizedBox(height: _ac!.rH(10)),
+                    _logoSection(),
+                    SizedBox(height: _ac!.rH(5)),
+                    _pageSection(),
+                    Text(
+                      "Forgot Password?",
+                      style: TextStyle(
                           fontFamily: "OpenSans",
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
-                          decoration: TextDecoration.underline
-                        ),
-                      )
-                    ],
-                  ),
+                          decoration: TextDecoration.underline),
+                    )
+                  ],
                 ),
               ),
               Spacer(),
@@ -84,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
     return Padding(
       padding: EdgeInsets.all(_ac!.rWP(6)),
       child: Container(
-        height: _ac!.rH(35),
+        height: _ac!.rH(40),
         width: _ac!.rW(100),
         child: PageView(
           physics: NeverScrollableScrollPhysics(),
@@ -101,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _firstPage() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         DropdownWidget(
           title: "Select Language",
@@ -111,6 +95,8 @@ class _LoginPageState extends State<LoginPage> {
           title: "Select Your Pumb",
         ),
         SizedBox(height: _ac!.rHP(2)),
+        Text("Forgot Password?"),
+        Spacer(),
         CustomButton(
           title: "Next",
           onTap: () {
@@ -140,13 +126,15 @@ class _LoginPageState extends State<LoginPage> {
           hint: "Enter password",
         ),
         SizedBox(height: _ac!.rHP(2)),
+        Spacer(),
         CustomButton(
           title: "Login",
           onTap: () {
-            _pageController.animateToPage(
-              1,
-              duration: Duration(milliseconds: 500),
-              curve: Curves.easeIn,
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(),
+              ),
             );
           },
         )
@@ -158,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       height: _ac!.rH(20),
       width: _ac!.rH(20),
-      color: Colors.white,
+      color: Colors.grey,
     );
   }
 }

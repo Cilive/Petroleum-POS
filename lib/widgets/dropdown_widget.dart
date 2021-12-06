@@ -7,7 +7,8 @@ class DropdownWidget extends StatelessWidget {
   final Function? onChanged;
   final String? value;
 
-  DropdownWidget({Key? key, this.title, this.items, this.onChanged, this.value}) : super(key: key);
+  DropdownWidget({Key? key, this.title, this.items, this.onChanged, this.value})
+      : super(key: key);
 
   AppConfig? _ac;
 
@@ -17,29 +18,31 @@ class DropdownWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "$title",
-          style: TextStyle(
-            fontFamily: "OpenSans",
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-        ),
-        SizedBox(height: _ac!.rHP(0.5)),
         Container(
           width: _ac!.rW(100),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
+            color: Color.fromRGBO(246, 246, 246, 1),
+            borderRadius: BorderRadius.circular(7),
           ),
           child: Padding(
             padding: EdgeInsets.only(
-              left: _ac!.rWP(3),
+              left: _ac!.rWP(4),
               right: _ac!.rWP(3),
+              top: _ac!.rHP(1),
+              bottom: _ac!.rHP(1),
             ),
             child: DropdownButtonFormField(
               items: [],
-              decoration: InputDecoration(border: InputBorder.none),
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "$title",
+                  hintStyle: TextStyle(
+                    fontFamily: "OpenSans",
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: Color.fromRGBO(183, 183, 183, 1),
+                  ),
+                  contentPadding: EdgeInsets.only(bottom: _ac!.rHP(1))),
             ),
           ),
         )

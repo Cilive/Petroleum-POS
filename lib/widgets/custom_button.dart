@@ -15,22 +15,12 @@ class CustomButton extends StatelessWidget {
       onTap: () => onTap!(),
       child: Container(
         width: _ac!.rW(100),
-        height: 40,
         child: Center(
           child: Container(
-            width: _ac!.rW(35),
-            height: 40,
+            height: _ac!.rH(7),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromRGBO(158, 218, 219, 1),
-                  Colors.white
-                  // Color.fromRGBO(158, 218, 219, 1),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-              borderRadius: BorderRadius.circular(30),
+              color: Color.fromRGBO(176, 35, 65, 1),
+              borderRadius: BorderRadius.circular(7),
             ),
             child: Center(
               child: Text(
@@ -38,7 +28,7 @@ class CustomButton extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: "OpenSans",
                   fontWeight: FontWeight.w700,
-                  color: Colors.black54,
+                  color: Colors.white,
                 ),
               ),
             ),

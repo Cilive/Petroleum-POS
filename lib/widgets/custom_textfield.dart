@@ -25,25 +25,18 @@ class CustomTextfield extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "$title",
-          style: TextStyle(
-            fontFamily: "OpenSans",
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-        ),
-        SizedBox(height: _ac!.rHP(0.5)),
         Container(
           width: _ac!.rW(100),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
+            color: Color.fromRGBO(246, 246, 246, 1),
+            borderRadius: BorderRadius.circular(7),
           ),
           child: Padding(
             padding: EdgeInsets.only(
               left: _ac!.rWP(3),
               right: _ac!.rWP(3),
+              top: _ac!.rHP(1),
+              bottom: _ac!.rHP(1),
             ),
             child: TextFormField(
               controller: controller,
@@ -52,11 +45,11 @@ class CustomTextfield extends StatelessWidget {
                 hintStyle: TextStyle(
                   fontSize: 13,
                   fontFamily: "OpenSans",
-                  fontWeight: FontWeight.w400,
-                  color: Colors.grey[500],
+                  fontWeight: FontWeight.w700,
+                  color: Color.fromRGBO(183, 183, 183, 1),
                 ),
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 10)
+                contentPadding: EdgeInsets.only(left: 10),
               ),
             ),
           ),
