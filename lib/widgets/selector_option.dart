@@ -22,8 +22,8 @@ class SelectorOption extends StatelessWidget {
         width: _ac!.rH(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(7),
-          color: isSelected! ? Color.fromRGBO(176, 35, 65, 1) : Colors.white,
-          border: Border.all(color: isSelected! ? Colors.white : Color.fromRGBO(176, 35, 65, 1))
+          color: isSelected! ? Colors.grey[500] : Colors.white,
+          border: Border.all(color: isSelected! ? Colors.white : Colors.black87)
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +47,7 @@ class SelectorOption extends StatelessWidget {
       fontSize: 14,
       fontFamily: "OpenSans",
       fontWeight: FontWeight.w700,
-      color: isSelected! ? Colors.white : Color.fromRGBO(176, 35, 65, 1),
+      color: isSelected! ? Colors.white : Colors.black87,
     );
   }
 }

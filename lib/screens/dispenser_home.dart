@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
-import 'package:skysoft/screens/dispenser_home.dart';
 import 'package:skysoft/screens/generate_invoice_page.dart';
-import 'package:skysoft/screens/settings.dart';
+import 'package:skysoft/widgets/dispenser_menu.dart';
 import 'package:skysoft/widgets/home_menu.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class DispenserHomePage extends StatefulWidget {
+  const DispenserHomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _DispenserHomePageState createState() => _DispenserHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _DispenserHomePageState extends State<DispenserHomePage> {
   AppConfig? _ac;
 
   @override
@@ -25,7 +24,7 @@ class _HomePageState extends State<HomePage> {
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.black87),
         title: Text(
-          "Home",
+          "Dispenser Home",
           style: TextStyle(
             fontSize: 16,
             fontFamily: "OpenSans",
@@ -33,22 +32,6 @@ class _HomePageState extends State<HomePage> {
             color: Colors.black87,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Settings(),
-                ),
-              );
-            },
-            icon: Icon(
-              Icons.settings,
-              color: Colors.black87,
-            ),
-          )
-        ],
       ),
       extendBodyBehindAppBar: true,
       body: Container(
@@ -64,37 +47,31 @@ class _HomePageState extends State<HomePage> {
         child: GridView(
           gridDelegate: SliverGrid.count(
             crossAxisCount: 2,
-            childAspectRatio: _ac!.rH(2.5) / _ac!.rW(5.5),
+            childAspectRatio: 5 / 2,
             crossAxisSpacing: _ac!.rWP(5),
             mainAxisSpacing: _ac!.rWP(5),
           ).gridDelegate,
           children: [
-            HomeMenu(
-              title: "Generate\nInvoice",
-              icon: Icons.print_outlined,
+            DispenserMenu(
+              title: "Dispenser 1",
               color: Color.fromRGBO(176, 35, 65, 1),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => GenerateInvoicePage(),
-                  ),
-                );
-              },
-            ),
-            HomeMenu(
-              title: "Dispenser\nReading",
               icon: Icons.copy_all,
-              color: Color.fromRGBO(176, 35, 65, 1),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DispenserHomePage(),
-                  ),
-                );
-              },
             ),
+            DispenserMenu(
+              title: "Dispenser 2",
+              color: Color.fromRGBO(176, 35, 65, 1),
+              icon: Icons.copy_all,
+            ),
+            DispenserMenu(
+              title: "Dispenser 3",
+              color: Color.fromRGBO(176, 35, 65, 1),
+              icon: Icons.copy_all,
+            ),
+            DispenserMenu(
+              title: "Dispenser 4",
+              color: Color.fromRGBO(176, 35, 65, 1),
+              icon: Icons.copy_all,
+            )
           ],
         ),
       ),

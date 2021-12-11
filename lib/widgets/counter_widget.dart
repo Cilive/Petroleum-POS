@@ -56,6 +56,7 @@ class _CounterWidgetState extends State<CounterWidget> {
                   textAlign: TextAlign.center,
                   controller: widget.controller,
                   decoration: InputDecoration(
+                    border: OutlineInputBorder(),
                     hintText: "00",
                     hintStyle: TextStyle(
                       fontSize: 14,
@@ -63,8 +64,6 @@ class _CounterWidgetState extends State<CounterWidget> {
                       fontWeight: FontWeight.w700,
                       color: Color.fromRGBO(176, 35, 65, 1),
                     ),
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.only(left: 10),
                   ),
                 ),
               ),
@@ -87,7 +86,7 @@ class _CounterWidgetState extends State<CounterWidget> {
         onTap!();
       },
       child: CircleAvatar(
-        backgroundColor: Color.fromRGBO(176, 35, 65, 1),
+        backgroundColor: Colors.grey[500],
         radius: _ac!.rWP(6),
         child: Icon(
           icon,

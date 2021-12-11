@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
 
-class HomeMenu extends StatelessWidget {
+class DispenserMenu extends StatelessWidget {
   final String? title;
   final IconData? icon;
   final VoidCallback? onTap;
   final Color? color;
 
-  HomeMenu({Key? key, this.title, this.icon, this.onTap, this.color})
+  DispenserMenu({Key? key, this.title, this.icon, this.onTap, this.color})
       : super(key: key);
 
   AppConfig? _ac;
@@ -19,11 +19,14 @@ class HomeMenu extends StatelessWidget {
       onTap: () => onTap!(),
       child: Container(
         decoration: BoxDecoration(
-            color: color, borderRadius: BorderRadius.circular(12)),
+            color: color,
+            borderRadius: BorderRadius.circular(12),
+            
+            ),
         child: Padding(
-          padding: EdgeInsets.all(_ac!.rWP(4)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          padding: EdgeInsets.all(_ac!.rWP(3)),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 children: [
@@ -42,27 +45,16 @@ class HomeMenu extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: _ac!.rHP(1)),
+              SizedBox(width: _ac!.rWP(2)),
               Text(
                 "$title",
                 style: TextStyle(
-                  color: Colors.white,
                     fontFamily: "OpenSans",
-                    fontSize: _ac!.rWP(4.5),
+                    color: Colors.white,
+                    fontSize: _ac!.rWP(3.5),
                     fontWeight: FontWeight.w700),
                 textAlign: TextAlign.start,
               ),
-              SizedBox(
-                width: _ac!.rW(10),
-                child: Divider(
-                  thickness: 3,
-                  color: Colors.white30,
-                ),
-              ),
-              SizedBox(height: _ac!.rHP(1)),
-              Row(
-                children: [Spacer(), Icon(Icons.arrow_forward,color: Colors.white,)],
-              )
             ],
           ),
         ),

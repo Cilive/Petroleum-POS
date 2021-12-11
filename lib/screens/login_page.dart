@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/providers/auth_provider.dart';
 import 'package:skysoft/screens/home_page.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
@@ -14,6 +16,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   PageController _pageController = PageController(initialPage: 0);
+  TextEditingController _username = TextEditingController();
+  TextEditingController _password = TextEditingController();
   AppConfig? _ac;
 
   @override
@@ -117,11 +121,13 @@ class _LoginPageState extends State<LoginPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomTextfield(
+          controller: _username,
           title: "Username",
           hint: "Enter username",
         ),
         SizedBox(height: _ac!.rHP(2)),
         CustomTextfield(
+          controller: _password,
           title: "Password",
           hint: "Enter password",
         ),
@@ -129,12 +135,15 @@ class _LoginPageState extends State<LoginPage> {
         Spacer(),
         CustomButton(
           title: "Login",
-          onTap: () {
-            Navigator.push(
+          onTap: () async {
+            await Provider.of<AuthProvider>(context, listen: false)
+                .login(_username.text, _password.text);
+            Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                 builder: (context) => HomePage(),
               ),
+              (route) => false,
             );
           },
         )
