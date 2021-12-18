@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/screens/printer_list.dart';
 import 'package:skysoft/widgets/counter_widget.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_selector.dart';
@@ -67,19 +68,18 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                 SizedBox(height: _ac!.rHP(1)),
                 CustomSelector(
                   onChange: (val) {
-                    WidgetsBinding.instance!
-                        .addPostFrameCallback((timeStamp) {
-                          setState(() {
-                      if (val == 0) {
-                        selectedItem = petrolOne;
-                      } else if (val == 1) {
-                        selectedItem = petrolTwo;
-                      } else {
-                        selectedItem = diesel;
-                      }
+                    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+                      setState(() {
+                        if (val == 0) {
+                          selectedItem = petrolOne;
+                        } else if (val == 1) {
+                          selectedItem = petrolTwo;
+                        } else {
+                          selectedItem = diesel;
+                        }
+                      });
+                      _calculateTotalAmount();
                     });
-                    _calculateTotalAmount();
-                        });
                   },
                 ),
                 Spacer(),
@@ -105,6 +105,10 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                 SizedBox(height: _ac!.rHP(1)),
                 CustomButton(
                   title: "Print Recipt",
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => PrinterList()));
+                  },
                 )
               ],
             ),

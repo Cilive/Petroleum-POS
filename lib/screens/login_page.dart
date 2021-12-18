@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skysoft/constants/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
 import 'package:skysoft/screens/home_page.dart';
+import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
 import 'package:skysoft/widgets/dropdown_widget.dart';
@@ -133,18 +135,45 @@ class _LoginPageState extends State<LoginPage> {
         ),
         SizedBox(height: _ac!.rHP(2)),
         Spacer(),
+        Consumer<AuthProvider>(
+          builder: (context, provider, child) {
+            if (provider.loginStatus == Status.LOADING) {
+              return Center(
+                child: SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: CupertinoActivityIndicator(),
+                ),
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
+        SizedBox(height: 40),
         CustomButton(
           title: "Login",
           onTap: () async {
-            await Provider.of<AuthProvider>(context, listen: false)
-                .login(_username.text, _password.text);
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomePage(),
-              ),
-              (route) => false,
-            );
+            Status result =
+                await Provider.of<AuthProvider>(context, listen: false)
+                    .login(_username.text, _password.text);
+            if (result == Status.SUCCESS) {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                ),
+                (route) => false,
+              );
+            } else if (result == Status.TIMEOUT) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Session Timout!")),
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Somethig went wrong try agian")),
+              );
+            }
           },
         )
       ],

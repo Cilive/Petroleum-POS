@@ -32,6 +32,8 @@ dependencies:
   provider:
   http:
   shared_preferences: 
+  esc_pos_bluetooth: ^0.4.1
+  intl:
 
 
   # The following adds the Cupertino Icons font to your application.

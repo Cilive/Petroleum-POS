@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/providers/auth_provider.dart';
 import 'package:skysoft/screens/dispenser_home.dart';
 import 'package:skysoft/screens/generate_invoice_page.dart';
 import 'package:skysoft/screens/settings.dart';
 import 'package:skysoft/widgets/home_menu.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -59,7 +61,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _bodySection() {
     return Padding(
-      padding: EdgeInsets.all(_ac!.rWP(5)),
+      padding: EdgeInsets.all(_ac!.rWP(4)),
       child: Container(
         child: GridView(
           gridDelegate: SliverGrid.count(
@@ -73,13 +75,14 @@ class _HomePageState extends State<HomePage> {
               title: "Generate\nInvoice",
               icon: Icons.print_outlined,
               color: Color.fromRGBO(176, 35, 65, 1),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => GenerateInvoicePage(),
-                  ),
-                );
+              onTap: () async {
+                await context.read<AuthProvider>().refreshToken();
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => GenerateInvoicePage(),
+                //   ),
+                // );
               },
             ),
             HomeMenu(
