@@ -145,7 +145,7 @@ class _PrinterListState extends State<PrinterList> {
     // final Image? image = decodeImage(imageBytes);
     // bytes += ticket.image(image);
 
-    bytes += ticket.text('GROCERYLY',
+    bytes += ticket.text('SkySoft',
         styles: PosStyles(
           align: PosAlign.center,
           height: PosTextSize.size2,
@@ -333,7 +333,7 @@ class _PrinterListState extends State<PrinterList> {
         ));
 
     // Print image
-    final ByteData data = await rootBundle.load('assets/logo.png');
+    final ByteData data = await rootBundle.load('assets/images/logo.png');
     final Uint8List buf = data.buffer.asUint8List();
     final img.Image image = img.decodeImage(buf)!;
     bytes += generator.image(image);
