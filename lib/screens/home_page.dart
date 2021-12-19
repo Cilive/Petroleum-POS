@@ -76,13 +76,13 @@ class _HomePageState extends State<HomePage> {
               icon: Icons.print_outlined,
               color: Color.fromRGBO(176, 35, 65, 1),
               onTap: () async {
-                await context.read<AuthProvider>().refreshToken();
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => GenerateInvoicePage(),
-                //   ),
-                // );
+                // await context.read<AuthProvider>().refreshToken();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GenerateInvoicePage(),
+                  ),
+                );
               },
             ),
             HomeMenu(

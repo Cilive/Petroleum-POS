@@ -79,7 +79,7 @@ packages:
     source: hosted
     version: "0.4.1"
   esc_pos_utils:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: esc_pos_utils
       url: "https://pub.dartlang.org"
@@ -112,7 +112,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_bluetooth_basic:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_bluetooth_basic
       url: "https://pub.dartlang.org"

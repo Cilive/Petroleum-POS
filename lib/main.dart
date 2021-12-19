@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color.fromRGBO(176, 35, 65, 1)
         ),
         title: 'SkySoft',
-        home: Splash(),
+        home: HomePage(),
       ),
     );
   }

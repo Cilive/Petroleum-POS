@@ -184,7 +184,11 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       height: _ac!.rH(20),
       width: _ac!.rH(20),
-      color: Colors.grey,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/logo.png")
+        )
+      ),
     );
   }
 }
