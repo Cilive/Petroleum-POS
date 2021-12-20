@@ -52,8 +52,9 @@ class AuthProvider extends ChangeNotifier {
         body: {'refresh': prefData.refresh},
       ).timeout(Duration(seconds: 30));
       if (response.statusCode == 200) {
-        print(response.body);
-        print("SUCCESS");
+        var data = jsonDecode(response.body)['access'];
+        await prefService.setAccessToken(data);
+        print("Token Refreshed");
       } else if (response.statusCode == 400) {
         print("FAILED");
       } else {

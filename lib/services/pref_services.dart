@@ -9,7 +9,14 @@ class PreferenceService {
     prefs.setString('id', data.id!);
   }
 
+  setAccessToken(String? access) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('access', access!);
+    await getPrefData();
+  }
+
   Future<PrefData> getPrefData() async {
+    print("Get Pref data called");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var _access = prefs.getString('access');
     var _refresh = prefs.getString('refresh');

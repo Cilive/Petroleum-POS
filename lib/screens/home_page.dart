@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
         child: GridView(
           gridDelegate: SliverGrid.count(
             crossAxisCount: 2,
-            childAspectRatio: _ac!.rH(2.5) / _ac!.rW(5.5),
+            childAspectRatio: _ac!.rH(2.5) / _ac!.rW(5.6),
             crossAxisSpacing: _ac!.rWP(5),
             mainAxisSpacing: _ac!.rWP(5),
           ).gridDelegate,

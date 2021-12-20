@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/screens/dispenser_reading.dart';
 import 'package:skysoft/screens/generate_invoice_page.dart';
 import 'package:skysoft/widgets/dispenser_menu.dart';
 import 'package:skysoft/widgets/home_menu.dart';
@@ -53,6 +54,14 @@ class _DispenserHomePageState extends State<DispenserHomePage> {
           ).gridDelegate,
           children: [
             DispenserMenu(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DispenserReadingPage(),
+                  ),
+                );
+              },
               title: "Dispenser 1",
               color: Color.fromRGBO(176, 35, 65, 1),
               icon: Icons.copy_all,
