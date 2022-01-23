@@ -1,3 +1,3 @@
 class Strings {
-  static final String BASE_URL = "https://4a95-157-46-140-197.ngrok.io";
+  static const String BASE_URL = "http://ramees777-41833.portmap.host:41833";
 }

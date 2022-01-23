@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skysoft/constants/providers.dart';
 import 'package:skysoft/providers/auth_provider.dart';
 import 'package:skysoft/providers/dispenser_provider.dart';
 import 'package:skysoft/providers/invoice_provider.dart';
@@ -16,11 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => InvoiceProvider()),
-        ChangeNotifierProvider(create: (_) => DispenserProvider()),
-      ],
+      providers: providers,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

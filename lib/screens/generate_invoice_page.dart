@@ -1,11 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/providers.dart';
+import 'package:skysoft/models/fuel.dart';
+import 'package:skysoft/providers/general_provider.dart';
+import 'package:skysoft/providers/invoice_provider.dart';
 import 'package:skysoft/screens/printer_list.dart';
+import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/counter_widget.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_selector.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
+import 'package:skysoft/widgets/selector_option.dart';
+import 'package:skysoft/widgets/snackbars.dart';
 import 'package:skysoft/widgets/titled_textfield.dart';
+import 'package:provider/provider.dart';
 
 class GenerateInvoicePage extends StatefulWidget {
   const GenerateInvoicePage({Key? key}) : super(key: key);
@@ -31,6 +40,16 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
   @override
   void initState() {
     literController.text = liter.toString();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) async {
+      Status status = await context.read<InvoiceProvider>().getInvoiceData();
+      if (status == Status.FAILED) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(wrongSnackBar());
+      } else if (status == Status.TIMEOUT) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(timeoutSnackBar());
+      }
+    });
     super.initState();
   }
 
@@ -43,7 +62,7 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.black87),
-        title: Text(
+        title: const Text(
           "Generate Invoice",
           style: TextStyle(
             fontSize: 16,
@@ -55,64 +74,69 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
       ),
       extendBodyBehindAppBar: true,
       body: SafeArea(
-        child: Container(
-          height: _ac!.rH(100),
-          width: _ac!.rW(100),
-          child: Padding(
-            padding: EdgeInsets.all(_ac!.rWP(5)),
-            child: Column(
-              children: [
-                CustomTextfield(
-                  hint: "Employee ID",
-                ),
-                SizedBox(height: _ac!.rHP(1)),
-                CustomSelector(
-                  onChange: (val) {
-                    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-                      setState(() {
-                        if (val == 0) {
-                          selectedItem = petrolOne;
-                        } else if (val == 1) {
-                          selectedItem = petrolTwo;
-                        } else {
-                          selectedItem = diesel;
-                        }
-                      });
-                      _calculateTotalAmount();
-                    });
-                  },
-                ),
-                Spacer(),
-                CounterWidget(
-                  controller: literController,
-                  onIncrement: () {
-                    literController.text =
-                        (int.parse(literController.text) + 1).toString();
-                    _calculateTotalAmount();
-                  },
-                  onDecrement: () {
-                    if (int.parse(literController.text) != 0) {
-                      literController.text =
-                          (int.parse(literController.text) - 1).toString();
-                      _calculateTotalAmount();
-                    }
-                  },
-                ),
-                Spacer(),
-                TitledTextfield(
-                  controller: amountController,
-                ),
-                SizedBox(height: _ac!.rHP(1)),
-                CustomButton(
-                  title: "Print Recipt",
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => PrinterList()));
-                  },
-                )
-              ],
+        child: Consumer<InvoiceProvider>(builder: (context, provider, child) {
+          if (provider.invoiceDataStatus == Status.LOADING) {
+            return const Center(
+              child: CupertinoActivityIndicator(),
+            );
+          } else {
+            return _bodyWidget();
+          }
+        }),
+      ),
+    );
+  }
+
+  Widget _bodyWidget() {
+    return SizedBox(
+      height: _ac!.rH(100),
+      width: _ac!.rW(100),
+      child: Padding(
+        padding: EdgeInsets.all(_ac!.rWP(5)),
+        child: Column(
+          children: [
+            CustomTextfield(
+              hint: "Employee ID",
             ),
-          ),
+            SizedBox(height: _ac!.rHP(1)),
+            Consumer<InvoiceProvider>(builder: (context, provider, child) {
+              return CustomSelector(
+                onChange: (Fuel val) {
+                  print(val.id);
+                },
+              );
+            }),
+            Spacer(),
+            CounterWidget(
+              controller: literController,
+              onIncrement: () {
+                literController.text =
+                    (int.parse(literController.text) + 1).toString();
+                _calculateTotalAmount();
+              },
+              onDecrement: () {
+                if (int.parse(literController.text) != 0) {
+                  literController.text =
+                      (int.parse(literController.text) - 1).toString();
+                  _calculateTotalAmount();
+                }
+              },
+            ),
+            const Spacer(),
+            TitledTextfield(
+              controller: amountController,
+            ),
+            SizedBox(height: _ac!.rHP(1)),
+            CustomButton(
+              title: "Print Recipt",
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PrinterList()));
+              },
+            )
+          ],
         ),
       ),
     );

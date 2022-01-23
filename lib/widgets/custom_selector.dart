@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/providers/invoice_provider.dart';
 import 'package:skysoft/widgets/selector_option.dart';
+import 'package:provider/provider.dart';
 
 class CustomSelector extends StatefulWidget {
   final Function? onChange;
@@ -15,6 +17,8 @@ class _CustomSelectorState extends State<CustomSelector> {
 
   int selectedIndex = 0;
 
+  ScrollController scrollController = ScrollController();
+
   @override
   void initState() {
     widget.onChange!(0);
@@ -24,51 +28,67 @@ class _CustomSelectorState extends State<CustomSelector> {
   @override
   Widget build(BuildContext context) {
     _ac = AppConfig(context);
-    return Container(
+    return SizedBox(
       width: _ac!.rW(100),
+      height: 90,
       child: Center(
-        child: Container(
+        child: Consumer<InvoiceProvider>(builder: (context, provider, child) {
+          return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(7),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SelectorOption(
-                  title: "Petrol",
-                  amount: 105,
-                  isSelected: selectedIndex == 0,
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = 0;
-                      widget.onChange!(0);
-                    });
-                  },
-                ),
-                SelectorOption(
-                  title: "Petrol",
-                  amount: 95,
-                  isSelected: selectedIndex == 1,
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = 1;
-                      widget.onChange!(1);
-                    });
-                  },
-                ),
-                SelectorOption(
-                  title: "Diesel",
-                  isSelected: selectedIndex == 2,
-                  amount: 105,
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = 2;
-                      widget.onChange!(2);
-                    });
-                  },
-                )
-              ],
-            )),
+            child: Scrollbar(
+              controller: scrollController,
+              isAlwaysShown: true,
+              thickness: 0.5,
+              child: ListView.builder(
+                physics: const PageScrollPhysics(),
+                itemCount: provider.fuels.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return SelectorOption(
+                    amount: provider.fuels[index].rate.toString(),
+                    title: provider.fuels[index].name,
+                    isSelected: index == selectedIndex,
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                      widget.onChange!(provider.fuels[index]);
+                    },
+                  );
+                },
+              ),
+            ),
+            // child: Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     SelectorOption(
+            //       title: "Petrol",
+            //       amount: 95,
+            //       isSelected: selectedIndex == 1,
+            //       onTap: () {
+            //         setState(() {
+            //           selectedIndex = 1;
+            //           widget.onChange!(1);
+            //         });
+            //       },
+            //     ),
+            //     SelectorOption(
+            //       title: "Diesel",
+            //       isSelected: selectedIndex == 2,
+            //       amount: 105,
+            //       onTap: () {
+            //         setState(() {
+            //           selectedIndex = 2;
+            //           widget.onChange!(2);
+            //         });
+            //       },
+            //     )
+            //   ],
+            // ),
+          );
+        }),
       ),
     );
   }

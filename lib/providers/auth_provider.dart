@@ -17,7 +17,7 @@ class AuthProvider extends ChangeNotifier {
     _setLoginStatus(Status.LOADING);
     try {
       http.Response response = await api.post(
-        apiname: 'employee/login/',
+        apiname: 'login/',
         body: {'email': username, 'password': password},
       ).timeout(Duration(seconds: 30));
       if (response.statusCode == 200) {
@@ -44,28 +44,31 @@ class AuthProvider extends ChangeNotifier {
     return loginStatus;
   }
 
-  refreshToken() async {
+  Future<bool> refreshToken() async {
     PrefData prefData = await prefService.getPrefData();
     try {
       http.Response response = await api.post(
-        apiname: 'employee/login/refresh/',
+        apiname: 'refresh/',
         body: {'refresh': prefData.refresh},
       ).timeout(Duration(seconds: 30));
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body)['access'];
         await prefService.setAccessToken(data);
         print("Token Refreshed");
+        return true;
       } else if (response.statusCode == 400) {
         print("FAILED");
+        return false;
       } else {
         print("SOMETHING WENT WRONG");
+        return false;
       }
-      print(response.statusCode);
-      print(response.body);
     } on TimeoutException catch (t) {
       print("Time Out");
+      return false;
     } catch (e) {
       print("Exception : $e");
+      return false;
     }
   }
 

@@ -12,13 +12,11 @@ class AuthIntercepter extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     handler.next(response);
-    super.onResponse(response, handler);
   }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     handler.next(err);
-    super.onError(err, handler);
   }
 
   @override
@@ -45,8 +43,8 @@ class AuthIntercepter extends Interceptor {
       handler.next(options);
     }
 
-    super.onRequest(options, handler);
   }
+
 
   bool isTokenExpired(String _token) {
     DateTime? expiryDate = Jwt.getExpiryDate(_token);

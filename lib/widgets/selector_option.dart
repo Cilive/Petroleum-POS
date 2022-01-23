@@ -3,7 +3,7 @@ import 'package:skysoft/constants/config.dart';
 
 class SelectorOption extends StatelessWidget {
   final String? title;
-  final int? amount;
+  final String? amount;
   final VoidCallback? onTap;
   final Color? color;
   final bool? isSelected;
@@ -17,26 +17,29 @@ class SelectorOption extends StatelessWidget {
     _ac = AppConfig(context);
     return GestureDetector(
       onTap: () => onTap!(),
-      child: Container(
-        height: _ac!.rH(10),
-        width: _ac!.rH(10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(7),
-          color: isSelected! ? Colors.grey[500] : Colors.white,
-          border: Border.all(color: isSelected! ? Colors.white : Colors.black87)
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "$title",
-              style: _textStyle(),
-            ),
-            Text(
-              "$amount",
-              style: _textStyle(),
-            ),
-          ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          height: _ac!.rH(10),
+          width: _ac!.rH(13),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(7),
+            color: isSelected! ? Colors.grey[500] : Colors.white,
+            border: Border.all(color: isSelected! ? Colors.white : Colors.black87)
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "$title",
+                style: _textStyle(),
+              ),
+              Text(
+                "$amount",
+                style: _textStyle(),
+              ),
+            ],
+          ),
         ),
       ),
     );
