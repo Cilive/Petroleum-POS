@@ -62,6 +62,7 @@ class DispenserProvider extends ChangeNotifier {
     String? startReading,
     String? endReading,
     String? amount,
+    int? dispenserId,
   }) async {
     _setUploadReadingStatus(Status.LOADING);
     try {

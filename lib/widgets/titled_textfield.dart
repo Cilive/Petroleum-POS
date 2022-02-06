@@ -6,6 +6,7 @@ class TitledTextfield extends StatelessWidget {
   final String? hint;
   final Function? onChanged;
   final String? value;
+  final bool editable;
   final TextEditingController? controller;
 
   TitledTextfield(
@@ -14,7 +15,7 @@ class TitledTextfield extends StatelessWidget {
       this.hint,
       this.onChanged,
       this.value,
-      this.controller})
+      this.controller, this.editable = true})
       : super(key: key);
 
   AppConfig? _ac;
@@ -28,7 +29,7 @@ class TitledTextfield extends StatelessWidget {
         Container(
           width: _ac!.rW(100),
           decoration: BoxDecoration(
-            color: Color.fromRGBO(246, 246, 246, 1),
+            color: const Color.fromRGBO(246, 246, 246, 1),
             borderRadius: BorderRadius.circular(7),
           ),
           child: Padding(
@@ -43,8 +44,8 @@ class TitledTextfield extends StatelessWidget {
                 SizedBox(
                   width: _ac!.rW(50),
                   child: Text(
-                    "Total Amount : ",
-                    style: TextStyle(
+                    "$title",
+                    style: const TextStyle(
                       fontSize: 14,
                       fontFamily: "OpenSans",
                       fontWeight: FontWeight.w700,
@@ -52,11 +53,11 @@ class TitledTextfield extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: _ac!.rW(30),
                   height: _ac!.rH(6),
                   child: TextFormField(
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontFamily: "OpenSans",
                       fontWeight: FontWeight.w700,
@@ -65,15 +66,16 @@ class TitledTextfield extends StatelessWidget {
                     textAlign: TextAlign.end,
                     controller: controller,
                     decoration: InputDecoration(
+                      enabled: editable,
                       hintText: "0.00",
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         fontSize: 14,
                         fontFamily: "OpenSans",
                         fontWeight: FontWeight.w700,
                         color: Color.fromRGBO(176, 35, 65, 1),
                       ),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 10),
+                      contentPadding: const EdgeInsets.only(left: 10),
                     ),
                   ),
                 ),

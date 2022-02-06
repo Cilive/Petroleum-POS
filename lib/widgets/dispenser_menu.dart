@@ -16,13 +16,14 @@ class DispenserMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     _ac = AppConfig(context);
     return GestureDetector(
-      onTap: () => onTap!(),
+      onTap: () {
+        onTap!();
+      },
       child: Container(
         decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(12),
-            
-            ),
+          color: color,
+          borderRadius: BorderRadius.circular(12),
+        ),
         child: Padding(
           padding: EdgeInsets.all(_ac!.rWP(3)),
           child: Row(

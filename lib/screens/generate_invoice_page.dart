@@ -25,21 +25,21 @@ class GenerateInvoicePage extends StatefulWidget {
 
 class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
   AppConfig? _ac;
-  int liter = 1;
-  double amount = 0;
-
-  int petrolOne = 100;
-  int petrolTwo = 95;
-  int diesel = 105;
+  double qty = 0;
+  double grossAmount = 0;
+  double totalAmount = 0;
+  double vatAmount = 0;
+  Fuel? _selectedFuel;
 
   int selectedItem = 0;
 
-  TextEditingController literController = TextEditingController();
-  TextEditingController amountController = TextEditingController();
+  TextEditingController qtyController = TextEditingController();
+  TextEditingController totalAmountController = TextEditingController();
+  TextEditingController grossAmountController = TextEditingController();
 
   @override
   void initState() {
-    literController.text = liter.toString();
+    qtyController.text = qty.toString();
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) async {
       Status status = await context.read<InvoiceProvider>().getInvoiceData();
       if (status == Status.FAILED) {
@@ -94,58 +94,138 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
       child: Padding(
         padding: EdgeInsets.all(_ac!.rWP(5)),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomTextfield(
-              hint: "Employee ID",
-            ),
             SizedBox(height: _ac!.rHP(1)),
             Consumer<InvoiceProvider>(builder: (context, provider, child) {
               return CustomSelector(
                 onChange: (Fuel val) {
-                  print(val.id);
+                  setState(() {
+                    _selectedFuel = val;
+                  });
+                  _calculateAmount();
                 },
               );
             }),
-            Spacer(),
-            CounterWidget(
-              controller: literController,
-              onIncrement: () {
-                literController.text =
-                    (int.parse(literController.text) + 1).toString();
-                _calculateTotalAmount();
-              },
-              onDecrement: () {
-                if (int.parse(literController.text) != 0) {
-                  literController.text =
-                      (int.parse(literController.text) - 1).toString();
-                  _calculateTotalAmount();
-                }
-              },
+            const Spacer(),
+            const Padding(
+              padding:  EdgeInsets.only(left: 2.0),
+              child: Text(
+                "Quantity (Ltr)",
+                style: TextStyle(
+                  fontSize: 13,
+                  fontFamily: "OpenSans",
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black87,
+                ),
+              ),
             ),
+             SizedBox(height: _ac!.rHP(0.5)),
+            CustomTextfield(
+                type: TextInputType.number,
+                hint: "Quantity in Liters",
+                controller: qtyController,
+                onChanged: (val) {
+                  _calculateAmount();
+                }),
+            // CounterWidget(
+            //   controller: literController,
+            //   onIncrement: () {
+            //     literController.text =
+            //         (int.parse(literController.text) + 1).toString();
+            //     _calculateTotalAmount();
+            //   },
+            //   onDecrement: () {
+            //     if (int.parse(literController.text) != 0) {
+            //       literController.text =
+            //           (int.parse(literController.text) - 1).toString();
+            //       _calculateTotalAmount();
+            //     }
+            //   },
+            // ),
             const Spacer(),
             TitledTextfield(
-              controller: amountController,
+              title: "Gross Amount : ",
+              controller: grossAmountController,
+              editable: false,
+            ),
+            TitledTextfield(
+              title: "Total Amount : ",
+              controller: totalAmountController,
+              editable: false,
             ),
             SizedBox(height: _ac!.rHP(1)),
-            CustomButton(
-              title: "Print Recipt",
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PrinterList()));
-              },
-            )
+            Consumer<InvoiceProvider>(builder: (context, provider, child) {
+              return CustomButton(
+                title: "Submit",
+                isLoading: provider.invoiceGenerateStatus == Status.LOADING,
+                onTap: () async {
+                  var paymentType = await _selectPaymentType();
+                  provider.submitInvoice(
+                    qty: qty.toString(),
+                    fuelId: _selectedFuel!.id!,
+                    paymentType: paymentType,
+                    type: 2,
+                    grossAmount: grossAmount.toString(),
+                    vatAmount: vatAmount.toString(),
+                    totalAmount: totalAmount.toString(),
+                    paidAmount: totalAmount.toString(),
+                  );
+                },
+              );
+            })
           ],
         ),
       ),
     );
   }
 
-  _calculateTotalAmount() {
-    print("Calculated");
-    amountController.text =
-        (selectedItem * int.parse(literController.text)).toString();
-    print(selectedItem.toString());
+  //select payment type is online or offline from dilaog
+  Future<int> _selectPaymentType() async {
+    return await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Select Payment Type"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.wifi_tethering),
+                  title: const Text("Online Payment"),
+                  onTap: () {
+                    Navigator.pop(context, 2);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.attach_money),
+                  title: const Text("Offline Payment"),
+                  onTap: () {
+                    Navigator.pop(context, 1);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  _calculateAmount() {
+    if (_selectedFuel != null) {
+      setState(() {
+        if (qtyController.text.toString() == '') {
+          qty = 0;
+        } else {
+          qty = double.parse(qtyController.text);
+        }
+        grossAmount = qty * _selectedFuel!.rate!.toDouble();
+        vatAmount = grossAmount * _selectedFuel!.fuelVat!.toDouble() / 100;
+        totalAmount = grossAmount + vatAmount;
+        grossAmountController.text = grossAmount.toString();
+        totalAmountController.text = totalAmount.toString();
+      });
+    }
   }
 }

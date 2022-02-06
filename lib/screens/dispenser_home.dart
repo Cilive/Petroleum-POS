@@ -87,6 +87,16 @@ class _DispenserHomePageState extends State<DispenserHomePage> {
                 color: const Color.fromRGBO(176, 35, 65, 1),
                 icon: Icons.copy_all,
                 title: provider.dispensers[index].name,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DispenserReadingPage(
+                        dispenser: provider.dispensers[index],
+                      ),
+                    ),
+                  );
+                },
               );
             },
             // children: [

@@ -21,7 +21,7 @@ class _CustomSelectorState extends State<CustomSelector> {
 
   @override
   void initState() {
-    widget.onChange!(0);
+    
     super.initState();
   }
 

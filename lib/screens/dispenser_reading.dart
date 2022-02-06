@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/models/dispenser.dart';
 import 'package:skysoft/providers/dispenser_provider.dart';
 import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/custom_button.dart';
@@ -8,7 +9,8 @@ import 'package:skysoft/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
 
 class DispenserReadingPage extends StatefulWidget {
-  const DispenserReadingPage({Key? key}) : super(key: key);
+  final Dispenser? dispenser;
+  const DispenserReadingPage({Key? key, this.dispenser}) : super(key: key);
 
   @override
   _DispenserReadingPageState createState() => _DispenserReadingPageState();
@@ -21,9 +23,7 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) async {
-      
-    });
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) async {});
     super.initState();
   }
 
@@ -36,7 +36,7 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.black87),
-        title: Text(
+        title: const Text(
           "Dispenser Reading",
           style: TextStyle(
             fontSize: 16,
@@ -86,7 +86,7 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
               },
             ),
             CustomButton(
-              title: "Pay",
+              title: "Submit",
               onTap: () async {
                 Status result = await context
                     .read<DispenserProvider>()

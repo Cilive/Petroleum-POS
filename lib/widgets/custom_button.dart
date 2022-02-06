@@ -1,10 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
 
 class CustomButton extends StatelessWidget {
   final String? title;
   final VoidCallback? onTap;
-  CustomButton({Key? key, this.title, this.onTap}) : super(key: key);
+  final bool? isLoading;
+  CustomButton({Key? key, this.title, this.onTap, this.isLoading = false})
+      : super(key: key);
 
   AppConfig? _ac;
 
@@ -12,25 +15,31 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     _ac = AppConfig(context);
     return GestureDetector(
-      onTap: () => onTap!(),
-      child: Container(
+      onTap: () {
+        if (!isLoading!) {
+          onTap!();
+        }
+      },
+      child: SizedBox(
         width: _ac!.rW(100),
         child: Center(
           child: Container(
             height: _ac!.rH(7),
             decoration: BoxDecoration(
-              color: Color.fromRGBO(176, 35, 65, 1),
+              color: const Color.fromRGBO(176, 35, 65, 1),
               borderRadius: BorderRadius.circular(7),
             ),
             child: Center(
-              child: Text(
-                "$title",
-                style: TextStyle(
-                  fontFamily: "OpenSans",
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
-              ),
+              child: isLoading!
+                  ? const CupertinoActivityIndicator()
+                  : Text(
+                      "$title",
+                      style: const TextStyle(
+                        fontFamily: "OpenSans",
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
             ),
           ),
         ),

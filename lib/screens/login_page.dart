@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                     _logoSection(),
                     SizedBox(height: _ac!.rH(5)),
                     _pageSection(),
-                    Text(
+                    const Text(
                       "Forgot Password?",
                       style: TextStyle(
                           fontFamily: "OpenSans",
@@ -52,10 +52,10 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-              Spacer(),
-              Divider(),
+              const Spacer(),
+              const Divider(),
               SizedBox(height: _ac!.rH(2)),
-              Text(
+              const Text(
                 "2021 ForeTech.pw, All Right Reserved",
                 style: TextStyle(
                     fontFamily: "OpenSans",
@@ -134,11 +134,11 @@ class _LoginPageState extends State<LoginPage> {
           hint: "Enter password",
         ),
         SizedBox(height: _ac!.rHP(2)),
-        Spacer(),
+        const Spacer(),
         Consumer<AuthProvider>(
           builder: (context, provider, child) {
             if (provider.loginStatus == Status.LOADING) {
-              return Center(
+              return const Center(
                 child: SizedBox(
                   height: 40,
                   width: 40,
@@ -150,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
             }
           },
         ),
-        SizedBox(height: 40),
+        const SizedBox(height: 40),
         CustomButton(
           title: "Login",
           onTap: () async {
@@ -167,11 +167,11 @@ class _LoginPageState extends State<LoginPage> {
               );
             } else if (result == Status.TIMEOUT) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Session Timout!")),
+                const SnackBar(content: Text("Session Timout!")),
               );
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Somethig went wrong try agian")),
+                const SnackBar(content: Text("Somethig went wrong try agian")),
               );
             }
           },
@@ -184,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       height: _ac!.rH(20),
       width: _ac!.rH(20),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage("assets/images/logo.png")
         )

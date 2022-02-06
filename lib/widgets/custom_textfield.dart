@@ -6,6 +6,7 @@ class CustomTextfield extends StatelessWidget {
   final String? hint;
   final Function? onChanged;
   final String? value;
+  final TextInputType type;
   final TextEditingController? controller;
 
   CustomTextfield(
@@ -14,7 +15,8 @@ class CustomTextfield extends StatelessWidget {
       this.hint,
       this.onChanged,
       this.value,
-      this.controller})
+      this.controller,
+      this.type = TextInputType.text})
       : super(key: key);
 
   AppConfig? _ac;
@@ -28,7 +30,7 @@ class CustomTextfield extends StatelessWidget {
         Container(
           width: _ac!.rW(100),
           decoration: BoxDecoration(
-            color: Color.fromRGBO(246, 246, 246, 1),
+            color: const Color.fromRGBO(246, 246, 246, 1),
             borderRadius: BorderRadius.circular(7),
           ),
           child: Padding(
@@ -39,17 +41,22 @@ class CustomTextfield extends StatelessWidget {
               bottom: _ac!.rHP(1),
             ),
             child: TextFormField(
+              onChanged: (val) {
+                onChanged!(val);
+              },
               controller: controller,
+              obscureText: title == "Password",
+              keyboardType: type,
               decoration: InputDecoration(
                 hintText: "$hint",
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   fontSize: 13,
                   fontFamily: "OpenSans",
                   fontWeight: FontWeight.w700,
                   color: Color.fromRGBO(183, 183, 183, 1),
                 ),
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 10),
+                contentPadding: const EdgeInsets.only(left: 10),
               ),
             ),
           ),
