@@ -1,18 +1,14 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:jwt_decode/jwt_decode.dart';
 import 'package:skysoft/constants/strings.dart';
 import 'package:skysoft/models/dispenser.dart';
 import 'package:skysoft/models/pref_data.dart';
 import 'package:skysoft/providers/auth_provider.dart';
-import 'package:skysoft/services/api_services.dart';
 import 'package:skysoft/services/intercepter.dart';
 import 'package:skysoft/services/pref_services.dart';
 import 'package:skysoft/utils/enums.dart';
-import 'package:http/http.dart' as http;
 
 class DispenserProvider extends ChangeNotifier {
   PreferenceService prefService = PreferenceService();
@@ -61,8 +57,10 @@ class DispenserProvider extends ChangeNotifier {
   Future<Status> uploadReading({
     String? startReading,
     String? endReading,
-    String? amount,
+    String? payableAmount,
     int? dispenserId,
+    int? fuelId,
+    double? fuelStock,
   }) async {
     _setUploadReadingStatus(Status.LOADING);
     try {
@@ -76,17 +74,19 @@ class DispenserProvider extends ChangeNotifier {
           'date': DateTime.now().toString(),
           'start_reading': startReading,
           'end_reading': endReading,
-          'payable_amt': amount,
-          "dispence": 2
+          'payable_amt': payableAmount,
+          "dispence": dispenserId,
+          "fuel": fuelId,
         },
       ).timeout(const Duration(seconds: 10));
+      print(response.data);
       if (response.statusCode == 201) {
         _setUploadReadingStatus(Status.SUCCESS);
       } else {
         _setUploadReadingStatus(Status.FAILED);
       }
     } on TimeoutException catch (e) {
-      _setDispensersStatus(Status.TIMEOUT);
+      _setUploadReadingStatus(Status.TIMEOUT);
     } catch (e) {
       _setUploadReadingStatus(Status.FAILED);
       log("Exception : $e");

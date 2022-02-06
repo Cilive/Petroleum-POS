@@ -21,10 +21,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Color.fromRGBO(176, 35, 65, 1)
+          primaryColor: const Color.fromRGBO(176, 35, 65, 1)
         ),
         title: 'SkySoft',
-        home: Splash(),
+        home: const Splash(),
       ),
     );
   }

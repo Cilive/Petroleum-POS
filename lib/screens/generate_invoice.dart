@@ -1,17 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
-import 'package:skysoft/constants/providers.dart';
 import 'package:skysoft/models/fuel.dart';
-import 'package:skysoft/providers/general_provider.dart';
 import 'package:skysoft/providers/invoice_provider.dart';
-import 'package:skysoft/screens/printer_list.dart';
 import 'package:skysoft/utils/enums.dart';
-import 'package:skysoft/widgets/counter_widget.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_selector.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
-import 'package:skysoft/widgets/selector_option.dart';
 import 'package:skysoft/widgets/snackbars.dart';
 import 'package:skysoft/widgets/titled_textfield.dart';
 import 'package:provider/provider.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
 import 'package:skysoft/screens/dispenser_home.dart';
-import 'package:skysoft/screens/generate_invoice_page.dart';
+import 'package:skysoft/screens/generate_invoice.dart';
 import 'package:skysoft/screens/settings.dart';
 import 'package:skysoft/widgets/home_menu.dart';
 import 'package:provider/provider.dart';

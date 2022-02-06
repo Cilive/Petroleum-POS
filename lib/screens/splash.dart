@@ -4,7 +4,7 @@ import 'package:skysoft/screens/home_page.dart';
 import 'package:skysoft/screens/login_page.dart';
 
 class Splash extends StatefulWidget {
-  Splash({Key? key}) : super(key: key);
+  const Splash({Key? key}) : super(key: key);
 
   @override
   _SplashState createState() => _SplashState();
@@ -14,9 +14,7 @@ class _SplashState extends State<Splash> {
 
   Future<bool> checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? user_id = prefs.getString('id');
-
-    print(user_id);
+    String? user_id = prefs.getString('tenant_name');
 
     if (user_id == null) {
       return false;
@@ -33,12 +31,12 @@ class _SplashState extends State<Splash> {
       if (userLogin) {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
-          return HomePage();
+          return const HomePage();
         }));
       } else {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
-          return LoginPage();
+          return const LoginPage();
         }));
       }
     });
@@ -47,7 +45,7 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: CircularProgressIndicator(

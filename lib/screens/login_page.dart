@@ -73,14 +73,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget _pageSection() {
     return Padding(
       padding: EdgeInsets.all(_ac!.rWP(6)),
-      child: Container(
+      child: SizedBox(
         height: _ac!.rH(40),
         width: _ac!.rW(100),
         child: PageView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           children: [
-            _firstPage(),
+            // _firstPage(),
             _secondPage(),
           ],
         ),
@@ -93,22 +93,23 @@ class _LoginPageState extends State<LoginPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        const Spacer(),
         DropdownWidget(
           title: "Select Language",
         ),
-        SizedBox(height: _ac!.rHP(2)),
-        DropdownWidget(
-          title: "Select Your Pumb",
-        ),
-        SizedBox(height: _ac!.rHP(2)),
-        Text("Forgot Password?"),
-        Spacer(),
+        // SizedBox(height: _ac!.rHP(2)),
+        // DropdownWidget(
+        //   title: "Select Your Pumb",
+        // ),
+        // SizedBox(height: _ac!.rHP(2)),
+        
+        const Spacer(),
         CustomButton(
           title: "Next",
           onTap: () {
             _pageController.animateToPage(
               1,
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               curve: Curves.easeIn,
             );
           },
@@ -120,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _secondPage() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         CustomTextfield(
           controller: _username,
@@ -134,6 +135,7 @@ class _LoginPageState extends State<LoginPage> {
           hint: "Enter password",
         ),
         SizedBox(height: _ac!.rHP(2)),
+        const Text("Forgot Password?"),
         const Spacer(),
         Consumer<AuthProvider>(
           builder: (context, provider, child) {

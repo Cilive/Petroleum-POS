@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 class CustomSelector extends StatefulWidget {
   final Function? onChange;
-  CustomSelector({Key? key, this.onChange}) : super(key: key);
+  const CustomSelector({Key? key, this.onChange}) : super(key: key);
 
   @override
   _CustomSelectorState createState() => _CustomSelectorState();
@@ -17,7 +17,10 @@ class _CustomSelectorState extends State<CustomSelector> {
 
   int selectedIndex = 0;
 
-  ScrollController scrollController = ScrollController();
+  ScrollController scrollController = ScrollController(
+    initialScrollOffset: 0.0,
+    
+  );
 
   @override
   void initState() {
@@ -37,28 +40,23 @@ class _CustomSelectorState extends State<CustomSelector> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(7),
             ),
-            child: Scrollbar(
-              controller: scrollController,
-              isAlwaysShown: true,
-              thickness: 0.5,
-              child: ListView.builder(
-                physics: const PageScrollPhysics(),
-                itemCount: provider.fuels.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return SelectorOption(
-                    amount: provider.fuels[index].rate.toString(),
-                    title: provider.fuels[index].name,
-                    isSelected: index == selectedIndex,
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = index;
-                      });
-                      widget.onChange!(provider.fuels[index]);
-                    },
-                  );
-                },
-              ),
+            child: ListView.builder(
+              physics: const PageScrollPhysics(),
+              itemCount: provider.fuels.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return SelectorOption(
+                  amount: provider.fuels[index].rate.toString(),
+                  title: provider.fuels[index].name,
+                  isSelected: index == selectedIndex,
+                  onTap: () {
+                    setState(() {
+                      selectedIndex = index;
+                    });
+                    widget.onChange!(provider.fuels[index]);
+                  },
+                );
+              },
             ),
             // child: Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
