@@ -2,7 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
 import 'package:skysoft/models/fuel.dart';
+import 'package:skysoft/models/info.dart';
+import 'package:skysoft/models/invoice.dart';
+import 'package:skysoft/providers/general_provider.dart';
 import 'package:skysoft/providers/invoice_provider.dart';
+import 'package:skysoft/screens/view_invoice.dart';
 import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_selector.dart';
@@ -104,7 +108,7 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
             }),
             const Spacer(),
             const Padding(
-              padding:  EdgeInsets.only(left: 2.0),
+              padding: EdgeInsets.only(left: 2.0),
               child: Text(
                 "Quantity (Ltr)",
                 style: TextStyle(
@@ -115,7 +119,7 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                 ),
               ),
             ),
-             SizedBox(height: _ac!.rHP(0.5)),
+            SizedBox(height: _ac!.rHP(0.5)),
             CustomTextfield(
                 type: TextInputType.number,
                 hint: "Quantity in Liters",
@@ -156,7 +160,8 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                 isLoading: provider.invoiceGenerateStatus == Status.LOADING,
                 onTap: () async {
                   var paymentType = await _selectPaymentType();
-                  provider.submitInvoice(
+                  var result = await provider.submitInvoice(
+                    context,
                     qty: qty.toString(),
                     fuelId: _selectedFuel!.id!,
                     paymentType: paymentType,
@@ -166,6 +171,27 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                     totalAmount: totalAmount.toString(),
                     paidAmount: totalAmount.toString(),
                   );
+                  print(result);
+                  if (result['status'] == Status.SUCCESS) {
+                    Invoice invoice = result["invoice"];
+                    Info? info = context.read<GebneralProvider>().companyInfo;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ViewInvoice(
+                          invoice: invoice,
+                          info: info!,
+                          fuel: _selectedFuel!,
+                        ),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(result['message']),
+                      ),
+                    );
+                  }
                 },
               );
             })

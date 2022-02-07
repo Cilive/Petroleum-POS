@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/models/fuel.dart';
 import 'package:skysoft/providers/invoice_provider.dart';
 import 'package:skysoft/widgets/selector_option.dart';
 import 'package:provider/provider.dart';
@@ -19,12 +20,17 @@ class _CustomSelectorState extends State<CustomSelector> {
 
   ScrollController scrollController = ScrollController(
     initialScrollOffset: 0.0,
-    
   );
 
   @override
   void initState() {
-    
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) async {
+      List<Fuel> fuels = context.read<InvoiceProvider>().fuels;
+      if (fuels.isNotEmpty) {
+        widget.onChange!(fuels[0]);
+      }
+      
+    });
     super.initState();
   }
 

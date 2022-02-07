@@ -38,6 +38,9 @@ dependencies:
   esc_pos_utils:
   dio:
   jwt_decode:
+  qr_flutter:
+  screenshot: 
+  path_provider:
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
             HomeMenu(
               title: "Generate\nInvoice",
               icon: Icons.print_outlined,
-              color: Color.fromRGBO(176, 35, 65, 1),
+              color: const Color.fromRGBO(176, 35, 65, 1),
               onTap: () async {
                 // await context.read<AuthProvider>().refreshToken();
                 Navigator.push(

@@ -2,11 +2,11 @@ class Invoice {
   int? id;
   int? invoiceNo;
   String? date;
-  int? qty;
+  double? qty;
   double? grossAmt;
-  int? paymentType;
-  int? type;
-  int? totalAmt;
+  String? paymentType;
+  String? type;
+  double? totalAmt;
   double? creditAmount;
   String? accountNumber;
   int? vatPercenatge;
@@ -17,7 +17,7 @@ class Invoice {
   String? updatedAt;
   int? expType;
   int? refNo;
-  int? fuelvatPercentage;
+  double? fuelvatPercentage;
   int? session;
   int? branches;
   String? contact;
