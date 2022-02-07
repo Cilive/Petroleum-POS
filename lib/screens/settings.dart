@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skysoft/constants/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
+import 'package:skysoft/screens/change_password.dart';
+import 'package:skysoft/screens/forgot_password.dart';
 import 'package:skysoft/screens/login_page.dart';
 
 class Settings extends StatefulWidget {
@@ -68,6 +70,18 @@ class _SettingsState extends State<Settings> {
                   builder: (context) => const LoginPage(),
                 ),
                 (route) => false,
+              );
+            },
+          ),
+          ListTile(
+            title: const Text("Change Password"),
+            leading: const Icon(Icons.lock,color: Color.fromRGBO(176, 35, 65, 1)),
+            onTap: () async {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>  ChangePassword(),
+                ),
               );
             },
           ),

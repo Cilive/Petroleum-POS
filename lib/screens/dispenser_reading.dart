@@ -55,16 +55,16 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromRGBO(176, 35, 65, 1),
         elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.black87),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
           "Dispenser Reading",
           style: TextStyle(
             fontSize: 16,
             fontFamily: "OpenSans",
             fontWeight: FontWeight.w700,
-            color: Colors.black87,
+            color: Colors.white,
           ),
         ),
       ),
@@ -90,7 +90,13 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
           height: _ac!.rH(85),
           width: _ac!.rW(100),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Text(
+                "Select Fuel",
+                style: TextStyle(
+                    fontFamily: "OpenSans", fontWeight: FontWeight.w700),
+              ),
               CustomSelector(
                 onChange: (Fuel val) {
                   setState(() {
@@ -99,6 +105,13 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
                   _calculateAmount();
                 },
               ),
+              SizedBox(height: _ac!.rHP(1)),
+              const Text(
+                "Start Reading",
+                style: TextStyle(
+                    fontFamily: "OpenSans", fontWeight: FontWeight.w700),
+              ),
+              SizedBox(height: _ac!.rHP(0.5)),
               CustomTextfield(
                 controller: startReading,
                 hint: "Start Reading",
@@ -106,7 +119,13 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
                   _calculateAmount();
                 },
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: _ac!.rHP(2)),
+              const Text(
+                "End Reading",
+                style: TextStyle(
+                    fontFamily: "OpenSans", fontWeight: FontWeight.w700),
+              ),
+              SizedBox(height: _ac!.rHP(0.5)),
               CustomTextfield(
                 controller: endReading,
                 hint: "End Reading",
@@ -144,7 +163,7 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Upload Success")),
                       );
-                       Navigator.pop(context);
+                      Navigator.pop(context);
                     } else if (result == Status.TIMEOUT) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Session Timout!")),
@@ -166,7 +185,8 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
   }
 
   _calculateAmount() {
-    if (_selectedFuel != null && startReading.text.isNotEmpty &&
+    if (_selectedFuel != null &&
+        startReading.text.isNotEmpty &&
         endReading.text.isNotEmpty) {
       setState(() {
         qty = double.parse(startReading.text) - double.parse(endReading.text);

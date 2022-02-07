@@ -7,6 +7,7 @@ class PreferenceService {
     prefs.setString('access', data.access!);
     prefs.setString('refresh', data.refresh!);
     prefs.setString('tenant_name', data.empTenantName!.username!);
+    prefs.setString('username', data.username!);
   }
 
   setAccessToken(String? access) async {
@@ -20,7 +21,8 @@ class PreferenceService {
     var _access = prefs.getString('access');
     var _refresh = prefs.getString('refresh');
     var _tenant = prefs.getString('tenant_name');
-    PrefData basicData = PrefData(access: _access, refresh: _refresh, empTenantName: EmpTenantName(username: _tenant));
+    var _username = prefs.getString('username');
+    PrefData basicData = PrefData(access: _access, refresh: _refresh, username: _username,empTenantName: EmpTenantName(username: _tenant));
     return basicData;
   }
 

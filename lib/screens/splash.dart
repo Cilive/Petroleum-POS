@@ -14,7 +14,7 @@ class _SplashState extends State<Splash> {
 
   Future<bool> checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? user_id = prefs.getString('tenant_name');
+    String? user_id = prefs.getString('username');
 
     if (user_id == null) {
       return false;

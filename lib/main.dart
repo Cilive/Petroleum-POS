@@ -4,6 +4,7 @@ import 'package:skysoft/constants/providers.dart';
 import 'package:skysoft/providers/auth_provider.dart';
 import 'package:skysoft/providers/dispenser_provider.dart';
 import 'package:skysoft/providers/invoice_provider.dart';
+import 'package:skysoft/screens/forgot_password.dart';
 import 'package:skysoft/screens/home_page.dart';
 import 'package:skysoft/screens/login_page.dart';
 import 'package:skysoft/screens/splash.dart';

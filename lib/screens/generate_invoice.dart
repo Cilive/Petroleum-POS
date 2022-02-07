@@ -58,16 +58,16 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromRGBO(176, 35, 65, 1),
         elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.black87),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
           "Generate Invoice",
           style: TextStyle(
             fontSize: 16,
             fontFamily: "OpenSans",
             fontWeight: FontWeight.w700,
-            color: Colors.black87,
+            color: Colors.white,
           ),
         ),
       ),
@@ -96,6 +96,14 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: _ac!.rHP(1)),
+            const Text(
+              "Select Fuel",
+              style: TextStyle(
+                fontFamily: "OpenSans",
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(height: _ac!.rHP(0.5)),
             Consumer<InvoiceProvider>(builder: (context, provider, child) {
               return CustomSelector(
                 onChange: (Fuel val) {
@@ -106,20 +114,15 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                 },
               );
             }),
-            const Spacer(),
-            const Padding(
-              padding: EdgeInsets.only(left: 2.0),
-              child: Text(
-                "Quantity (Ltr)",
-                style: TextStyle(
-                  fontSize: 13,
-                  fontFamily: "OpenSans",
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black87,
-                ),
+            SizedBox(height: _ac!.rHP(2)),
+            const Text(
+              "Quantity (Ltr)",
+              style: TextStyle(
+                fontFamily: "OpenSans",
+                fontWeight: FontWeight.w700,
               ),
             ),
-            SizedBox(height: _ac!.rHP(0.5)),
+            SizedBox(height: _ac!.rHP(1)),
             CustomTextfield(
                 type: TextInputType.number,
                 hint: "Quantity in Liters",

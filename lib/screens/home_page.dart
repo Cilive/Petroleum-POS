@@ -23,16 +23,16 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromRGBO(176, 35, 65, 1),
         elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.black87),
-        title: Text(
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text(
           "Home",
           style: TextStyle(
             fontSize: 16,
             fontFamily: "OpenSans",
             fontWeight: FontWeight.w700,
-            color: Colors.black87,
+            color: Colors.white,
           ),
         ),
         actions: [
@@ -45,9 +45,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.settings,
-              color: Colors.black87,
+              color: Colors.white,
             ),
           )
         ],

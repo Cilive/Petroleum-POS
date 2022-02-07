@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skysoft/constants/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
+import 'package:skysoft/screens/forgot_password.dart';
 import 'package:skysoft/screens/home_page.dart';
 import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/custom_button.dart';
@@ -41,13 +42,24 @@ class _LoginPageState extends State<LoginPage> {
                     _logoSection(),
                     SizedBox(height: _ac!.rH(5)),
                     _pageSection(),
-                    const Text(
-                      "Forgot Password?",
-                      style: TextStyle(
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ForgotPassword(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        "Forgot Password?",
+                        style: TextStyle(
                           fontFamily: "OpenSans",
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
-                          decoration: TextDecoration.underline),
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
                     )
                   ],
                 ),
@@ -102,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
         //   title: "Select Your Pumb",
         // ),
         // SizedBox(height: _ac!.rHP(2)),
-        
+
         const Spacer(),
         CustomButton(
           title: "Next",
@@ -137,46 +149,50 @@ class _LoginPageState extends State<LoginPage> {
         SizedBox(height: _ac!.rHP(2)),
         const Text("Forgot Password?"),
         const Spacer(),
+        // Consumer<AuthProvider>(
+        //   builder: (context, provider, child) {
+        //     if (provider.loginStatus == Status.LOADING) {
+        //       return const Center(
+        //         child: SizedBox(
+        //           height: 40,
+        //           width: 40,
+        //           child: CupertinoActivityIndicator(),
+        //         ),
+        //       );
+        //     } else {
+        //       return Container();
+        //     }
+        //   },
+        // ),
+        const Spacer(),
         Consumer<AuthProvider>(
-          builder: (context, provider, child) {
-            if (provider.loginStatus == Status.LOADING) {
-              return const Center(
-                child: SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: CupertinoActivityIndicator(),
-                ),
-              );
-            } else {
-              return Container();
-            }
-          },
-        ),
-        const SizedBox(height: 40),
-        CustomButton(
-          title: "Login",
-          onTap: () async {
-            Status result =
-                await Provider.of<AuthProvider>(context, listen: false)
-                    .login(_username.text, _password.text);
-            if (result == Status.SUCCESS) {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomePage(),
-                ),
-                (route) => false,
-              );
-            } else if (result == Status.TIMEOUT) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Session Timout!")),
-              );
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Somethig went wrong try agian")),
-              );
-            }
-          },
+          builder: (context, provider,child) {
+            return CustomButton(
+              title: "Login",
+              isLoading: provider.loginStatus == Status.LOADING,
+              onTap: () async {
+                Status result =
+                    await provider.login(_username.text, _password.text);
+                if (result == Status.SUCCESS) {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    ),
+                    (route) => false,
+                  );
+                } else if (result == Status.TIMEOUT) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Session Timout!")),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Somethig went wrong try agian")),
+                  );
+                }
+              },
+            );
+          }
         )
       ],
     );
@@ -187,10 +203,7 @@ class _LoginPageState extends State<LoginPage> {
       height: _ac!.rH(20),
       width: _ac!.rH(20),
       decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/images/logo.png")
-        )
-      ),
+          image: DecorationImage(image: AssetImage("assets/images/logo.png"))),
     );
   }
 }

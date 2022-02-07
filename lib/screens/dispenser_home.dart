@@ -41,16 +41,16 @@ class _DispenserHomePageState extends State<DispenserHomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor:const Color.fromRGBO(176, 35, 65, 1),
         elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.black87),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
           "Dispenser Home",
           style: TextStyle(
             fontSize: 16,
             fontFamily: "OpenSans",
             fontWeight: FontWeight.w700,
-            color: Colors.black87,
+            color: Colors.white,
           ),
         ),
       ),

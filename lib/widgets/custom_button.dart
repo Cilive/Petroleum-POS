@@ -6,7 +6,13 @@ class CustomButton extends StatelessWidget {
   final String? title;
   final VoidCallback? onTap;
   final bool? isLoading;
-  CustomButton({Key? key, this.title, this.onTap, this.isLoading = false})
+  final bool? isEnabled;
+  CustomButton(
+      {Key? key,
+      this.title,
+      this.onTap,
+      this.isLoading = false,
+      this.isEnabled = true})
       : super(key: key);
 
   AppConfig? _ac;
@@ -16,7 +22,8 @@ class CustomButton extends StatelessWidget {
     _ac = AppConfig(context);
     return GestureDetector(
       onTap: () {
-        if (!isLoading!) {
+        if (!isLoading! && isEnabled!) {
+          print("Clicked");
           onTap!();
         }
       },
@@ -26,7 +33,9 @@ class CustomButton extends StatelessWidget {
           child: Container(
             height: _ac!.rH(7),
             decoration: BoxDecoration(
-              color: const Color.fromRGBO(176, 35, 65, 1),
+              color: isLoading!
+                  ? Colors.black12
+                  : isEnabled! ? const Color.fromRGBO(176, 35, 65, 1) : Colors.grey,
               borderRadius: BorderRadius.circular(7),
             ),
             child: Center(
