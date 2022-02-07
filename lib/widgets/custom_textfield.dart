@@ -7,6 +7,7 @@ class CustomTextfield extends StatelessWidget {
   final Function? onChanged;
   final String? value;
   final TextInputType type;
+  final bool isEnabled;
   final TextEditingController? controller;
 
   CustomTextfield(
@@ -16,7 +17,7 @@ class CustomTextfield extends StatelessWidget {
       this.onChanged,
       this.value,
       this.controller,
-      this.type = TextInputType.text})
+      this.type = TextInputType.text, this.isEnabled = true})
       : super(key: key);
 
   AppConfig? _ac;
@@ -44,6 +45,7 @@ class CustomTextfield extends StatelessWidget {
               onChanged: (val) {
                 onChanged!(val);
               },
+              enabled: isEnabled,
               controller: controller,
               obscureText: title == "Password",
               keyboardType: type,

@@ -37,7 +37,9 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
   @override
   void initState() {
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) async {
-      Status status = await context.read<InvoiceProvider>().getInvoiceData();
+      Status status = await context.read<InvoiceProvider>().getInvoiceData(
+            dispenserId: widget.dispenser!.id.toString(),
+          );
       if (status == Status.FAILED) {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(wrongSnackBar());
@@ -45,6 +47,10 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(timeoutSnackBar());
       }
+      var prevReading =
+          context.read<InvoiceProvider>().previouseDispenserReading;
+        startReading.text = prevReading.toString();
+      
     });
     super.initState();
   }
@@ -113,6 +119,7 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
               ),
               SizedBox(height: _ac!.rHP(0.5)),
               CustomTextfield(
+                isEnabled: false,
                 controller: startReading,
                 hint: "Start Reading",
                 onChanged: (val) {
@@ -122,6 +129,7 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
               SizedBox(height: _ac!.rHP(2)),
               const Text(
                 "End Reading",
+                
                 style: TextStyle(
                     fontFamily: "OpenSans", fontWeight: FontWeight.w700),
               ),
@@ -129,6 +137,7 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
               CustomTextfield(
                 controller: endReading,
                 hint: "End Reading",
+                type: TextInputType.number,
                 onChanged: (val) {
                   _calculateAmount();
                 },

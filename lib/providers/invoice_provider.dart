@@ -22,11 +22,15 @@ class InvoiceProvider extends ChangeNotifier {
   List<Fuel> fuels = [];
   Status invoiceGenerateStatus = Status.IDLE;
   Status invoiceSaveStatus = Status.IDLE;
+  double previouseDispenserReading = 0.0;
 
-  Future<Status> getInvoiceData() async {
+  Future<Status> getInvoiceData({String? dispenserId = ''}) async {
     _setInvoiceDataStatus(Status.LOADING);
     try {
       await _getFuelData();
+      if (dispenserId != '') {
+        await getPreviouseReading(dispenserId!);
+      }
       _setInvoiceDataStatus(Status.SUCCESS);
     } on TimeoutException catch (e) {
       _setInvoiceDataStatus(Status.TIMEOUT);
@@ -37,7 +41,28 @@ class InvoiceProvider extends ChangeNotifier {
     return invoiceDataStatus;
   }
 
+  getPreviouseReading(String id) async {
+    PrefData data = await prefService.getPrefData();
+    dio.interceptors.add(AuthIntercepter());
+    Response response = await dio
+        .get(
+          ///TODO: Remove [.localhost] from api name
+          Strings.BASE_URL +
+              "/clients/${data.empTenantName!.username}.localhost/employee/previous_reading/$id/",
+        )
+        .timeout(const Duration(seconds: 10));
+    print(response.data);
+    if (response.statusCode == 200) {
+      if (response.data['msg'] == 'Success') {
+        previouseDispenserReading = response.data['data']['previous_meter_reading'];
+      }
+    } else {
+      previouseDispenserReading = 0.0;
+    }
+  }
+
   _getFuelData() async {
+    print("get fuel");
     fuels = [];
     PrefData data = await prefService.getPrefData();
     dio.interceptors.add(AuthIntercepter());
@@ -48,6 +73,7 @@ class InvoiceProvider extends ChangeNotifier {
               "/clients/${data.empTenantName!.username}.localhost/employee/fuel/",
         )
         .timeout(const Duration(seconds: 10));
+    print("Fuel Data : ${response.data}");
     if (response.statusCode == 200) {
       if (response.data['msg'] == 'Success') {
         List tmp = response.data['data'];
@@ -134,7 +160,7 @@ class InvoiceProvider extends ChangeNotifier {
     } catch (e) {
       _setInvoiceSaveStatus(Status.FAILED);
     }
-    return {"status" : invoiceSaveStatus, "path" : path };
+    return {"status": invoiceSaveStatus, "path": path};
   }
 
   _setInvoiceSaveStatus(Status status) {
