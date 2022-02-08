@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skysoft/constants/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
+import 'package:skysoft/screens/login_page.dart';
 import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
@@ -68,7 +69,8 @@ class ForgotPassword extends StatelessWidget {
               SizedBox(height: _ac!.rHP(1)),
               CustomButton(
                 title: "Send OTP",
-                isEnabled: provider.forgotPasswordChangeStatus != Status.LOADING,
+                isEnabled:
+                    provider.forgotPasswordChangeStatus != Status.LOADING,
                 isLoading: provider.otpSendStatus == Status.LOADING,
                 onTap: () async {
                   if (emailController.text.isNotEmpty) {
@@ -80,16 +82,26 @@ class ForgotPassword extends StatelessWidget {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: const Text("OTP sent"),
+                            title: const Text(
+                              "Success",
+                              style: TextStyle(
+                                fontFamily: "OpenSans",
+                                color: Color.fromRGBO(176, 35, 65, 1),
+                              ),
+                            ),
                             content: const Text(
-                                "An OTP has been sent to your email. Please enter the OTP to change your password"),
+                              "OTP has been sent to your email, please check your email and enter the OTP",
+                              style: TextStyle(
+                                fontFamily: "OpenSans",
+                              ),
+                            ),
                             actions: [
                               FlatButton(
-                                child: const Text("OK"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                              )
+                                child: const Text("OK"),
+                              ),
                             ],
                           );
                         },
@@ -100,26 +112,59 @@ class ForgotPassword extends StatelessWidget {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: const Text("Error"),
+                            title: const Text(
+                              "Error",
+                              style: TextStyle(
+                                fontFamily: "OpenSans",
+                                color: Color.fromRGBO(176, 35, 65, 1),
+                              ),
+                            ),
                             content: const Text(
-                                "An error occurred while sending OTP. Please try again"),
+                              "An error occured while sending OTP, please try again",
+                              style: TextStyle(
+                                fontFamily: "OpenSans",
+                              ),
+                            ),
                             actions: [
                               FlatButton(
-                                child: const Text("OK"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                              )
+                                child: const Text("OK"),
+                              ),
                             ],
                           );
                         },
                       );
                     }
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Please enter email address"),
-                      ),
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text(
+                            "Error",
+                            style: TextStyle(
+                              fontFamily: "OpenSans",
+                              color: Color.fromRGBO(176, 35, 65, 1),
+                            ),
+                          ),
+                          content: const Text(
+                            "Please enter email address",
+                            style: TextStyle(
+                              fontFamily: "OpenSans",
+                            ),
+                          ),
+                          actions: [
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        );
+                      },
                     );
                   }
                 },
@@ -155,7 +200,8 @@ class ForgotPassword extends StatelessWidget {
               SizedBox(height: _ac!.rHP(1)),
               CustomButton(
                 title: "Change Password",
-                isLoading: provider.forgotPasswordChangeStatus == Status.LOADING,
+                isLoading:
+                    provider.forgotPasswordChangeStatus == Status.LOADING,
                 isEnabled: provider.otpSendStatus == Status.SUCCESS,
                 onTap: () async {
                   print("Change Password");
@@ -166,26 +212,99 @@ class ForgotPassword extends StatelessWidget {
                         otp: otpController.text,
                         password: passwordController.text);
                     if (result == Status.SUCCESS) {
-                      //show success snackbar and exit
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Password changed successfully"),
-                        ),
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text(
+                              "Success",
+                              style: TextStyle(
+                                fontFamily: "OpenSans",
+                                color: Color.fromRGBO(176, 35, 65, 1),
+                              ),
+                            ),
+                            content: const Text(
+                              "Password has been changed successfully",
+                              style: TextStyle(
+                                fontFamily: "OpenSans",
+                              ),
+                            ),
+                            actions: [
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => LoginPage(),
+                                      ),
+                                      (route) => false);
+                                },
+                                child: const Text("OK"),
+                              ),
+                            ],
+                          );
+                        },
                       );
-                      Navigator.of(context).pop();
-                    }else{
+                    } else {
                       //show error snackbar
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("An error occurred while changing password"),
-                        ),
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text(
+                              "Error",
+                              style: TextStyle(
+                                fontFamily: "OpenSans",
+                                color: Color.fromRGBO(176, 35, 65, 1),
+                              ),
+                            ),
+                            content: const Text(
+                              "An error occured while changing password, please try again",
+                              style: TextStyle(
+                                fontFamily: "OpenSans",
+                              ),
+                            ),
+                            actions: [
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("OK"),
+                              ),
+                            ],
+                          );
+                        },
                       );
                     }
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Please enter OTP and password"),
-                      ),
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text(
+                            "Error",
+                            style: TextStyle(
+                              fontFamily: "OpenSans",
+                              color: Color.fromRGBO(176, 35, 65, 1),
+                            ),
+                          ),
+                          content: const Text(
+                            "Please enter OTP and new password",
+                            style: TextStyle(
+                              fontFamily: "OpenSans",
+                            ),
+                          ),
+                          actions: [
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        );
+                      },
                     );
                   }
                 },

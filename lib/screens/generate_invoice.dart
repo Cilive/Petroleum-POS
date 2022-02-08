@@ -162,6 +162,68 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                 title: "Submit",
                 isLoading: provider.invoiceGenerateStatus == Status.LOADING,
                 onTap: () async {
+                  //check if fuel is selected
+                  if (_selectedFuel == null) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text(
+                            "Error",
+                            style: TextStyle(
+                              fontFamily: "OpenSans",
+                              color: Color.fromRGBO(176, 35, 65, 1),
+                            ),
+                          ),
+                          content: const Text("Please select Fuel",style: TextStyle(
+                                fontFamily: "OpenSans",
+                              ),),
+                          actions: [
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    return;
+                  }
+
+                  print(qtyController.text);
+
+                  //check if quantity is entered
+                  if (qtyController.text == 0.0.toString()) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text(
+                            "Error",
+                            style: TextStyle(
+                              fontFamily: "OpenSans",
+                              color: Color.fromRGBO(176, 35, 65, 1),
+                            ),
+                          ),
+                          content: const Text("Please enter quantity",style: TextStyle(
+                                fontFamily: "OpenSans",
+                              ),),
+                          actions: [
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    return;
+                  }
+
                   var paymentType = await _selectPaymentType();
                   var result = await provider.submitInvoice(
                     context,

@@ -27,6 +27,7 @@ class Invoice {
   int? vat;
   int? bank;
   int? cash;
+  String? qrCode;
 
   Invoice(
       {this.id,
@@ -56,7 +57,8 @@ class Invoice {
       this.company,
       this.vat,
       this.bank,
-      this.cash});
+      this.cash,
+      this.qrCode});
 
   Invoice.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -87,6 +89,7 @@ class Invoice {
     vat = json['vat'];
     bank = json['bank'];
     cash = json['cash'];
+    qrCode = json['base_64_encoded'];
   }
 
   Map<String, dynamic> toJson() {
@@ -119,6 +122,7 @@ class Invoice {
     data['vat'] = this.vat;
     data['bank'] = this.bank;
     data['cash'] = this.cash;
+    data['base_64_encoded'] = this.qrCode;
     return data;
   }
 }

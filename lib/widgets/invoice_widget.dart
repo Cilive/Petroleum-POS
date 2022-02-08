@@ -17,7 +17,7 @@ class InvoiceWidget extends StatelessWidget {
   final String? measure;
   final String? total;
   final String? item;
-  final Map? qrData;
+  final String? qrData;
   InvoiceWidget(
       {Key? key,
       this.invoiceNumber,
@@ -436,7 +436,7 @@ class InvoiceWidget extends StatelessWidget {
                         width: _hp * 16,
                         color: Colors.black54,
                         child: QrImage(
-                          data: _convertToBASE64String(qrData!),
+                          data: qrData!,
                           version: QrVersions.auto,
                           size: _hp * 16,
                           backgroundColor: Colors.white,
@@ -467,12 +467,5 @@ class InvoiceWidget extends StatelessWidget {
         );
       }),
     );
-  }
-
-  String _convertToBASE64String(Map data) {
-    String s = data.toString();
-    Codec<String, String> stringToBase64 = utf8.fuse(base64);
-    String encoded = stringToBase64.encode(s);
-    return encoded;
   }
 }

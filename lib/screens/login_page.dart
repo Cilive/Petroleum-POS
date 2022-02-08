@@ -109,12 +109,6 @@ class _LoginPageState extends State<LoginPage> {
         DropdownWidget(
           title: "Select Language",
         ),
-        // SizedBox(height: _ac!.rHP(2)),
-        // DropdownWidget(
-        //   title: "Select Your Pumb",
-        // ),
-        // SizedBox(height: _ac!.rHP(2)),
-
         const Spacer(),
         CustomButton(
           title: "Next",
@@ -147,30 +141,79 @@ class _LoginPageState extends State<LoginPage> {
           hint: "Enter password",
         ),
         SizedBox(height: _ac!.rHP(2)),
-        const Text("Forgot Password?"),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ForgotPassword()));
+          },
+          child: const Text("Forgot Password?"),
+        ),
         const Spacer(),
-        // Consumer<AuthProvider>(
-        //   builder: (context, provider, child) {
-        //     if (provider.loginStatus == Status.LOADING) {
-        //       return const Center(
-        //         child: SizedBox(
-        //           height: 40,
-        //           width: 40,
-        //           child: CupertinoActivityIndicator(),
-        //         ),
-        //       );
-        //     } else {
-        //       return Container();
-        //     }
-        //   },
-        // ),
-        const Spacer(),
-        Consumer<AuthProvider>(
-          builder: (context, provider,child) {
-            return CustomButton(
-              title: "Login",
-              isLoading: provider.loginStatus == Status.LOADING,
-              onTap: () async {
+        Consumer<AuthProvider>(builder: (context, provider, child) {
+          return CustomButton(
+            title: "Login",
+            isLoading: provider.loginStatus == Status.LOADING,
+            onTap: () async {
+              //validate username and password
+              if (_username.text.isEmpty) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text(
+                        "Error",
+                        style: TextStyle(
+                          fontFamily: "OpenSans",
+                          color: Color.fromRGBO(176, 35, 65, 1),
+                        ),
+                      ),
+                      content: const Text(
+                        "Username is required",
+                        style: TextStyle(
+                          fontFamily: "OpenSans",
+                        ),
+                      ),
+                      actions: [
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("OK"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else if (_password.text.isEmpty) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text(
+                        "Error",
+                        style: TextStyle(
+                          fontFamily: "OpenSans",
+                          color: Color.fromRGBO(176, 35, 65, 1),
+                        ),
+                      ),
+                      content: const Text(
+                        "Password is required",
+                        style: TextStyle(
+                          fontFamily: "OpenSans",
+                        ),
+                      ),
+                      actions: [
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("OK"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else {
                 Status result =
                     await provider.login(_username.text, _password.text);
                 if (result == Status.SUCCESS) {
@@ -187,23 +230,40 @@ class _LoginPageState extends State<LoginPage> {
                   );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Somethig went wrong try agian")),
+                    const SnackBar(
+                        content: Text("Somethig went wrong try agian")),
                   );
                 }
-              },
-            );
-          }
-        )
+              }
+            },
+          );
+        })
       ],
     );
   }
 
   Widget _logoSection() {
-    return Container(
-      height: _ac!.rH(20),
-      width: _ac!.rH(20),
-      decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage("assets/images/logo.png"))),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          height: _ac!.rH(15),
+          width: _ac!.rH(20),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/logo.png"),
+            ),
+          ),
+        ),
+        Text(
+          "SkySoft",
+          style: TextStyle(
+              fontFamily: "OpenSans",
+              fontSize: _ac!.rHP(5),
+              fontWeight: FontWeight.w900,
+              color: const Color.fromRGBO(176, 35, 65, 1)),
+        )
+      ],
     );
   }
 }

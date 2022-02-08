@@ -20,41 +20,47 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     _ac = AppConfig(context);
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(176, 35, 65, 1),
-        elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text(
-          "Home",
-          style: TextStyle(
-            fontSize: 16,
-            fontFamily: "OpenSans",
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Settings(),
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.settings,
+    return WillPopScope(
+      onWillPop: () async {
+        var val = await _onWillPop();
+        return val!;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: const Color.fromRGBO(176, 35, 65, 1),
+          elevation: 0.0,
+          iconTheme: const IconThemeData(color: Colors.white),
+          title: const Text(
+            "Home",
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: "OpenSans",
+              fontWeight: FontWeight.w700,
               color: Colors.white,
             ),
-          )
-        ],
-      ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        child: _bodySection(),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Settings(),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.settings,
+                color: Colors.white,
+              ),
+            )
+          ],
+        ),
+        extendBodyBehindAppBar: true,
+        body: Container(
+          child: _bodySection(),
+        ),
       ),
     );
   }
@@ -101,6 +107,35 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  //Confirm do you want to exit dialog
+  Future<bool?> _onWillPop() async {
+    return await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'Are you sure?',
+            style: TextStyle(
+              fontFamily: "OpenSans",
+              color: Color.fromRGBO(176, 35, 65, 1),
+            ),
+          ),
+          content: const Text('Do you want to exit an App'),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('No'),
+            ),
+            FlatButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

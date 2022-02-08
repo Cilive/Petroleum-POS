@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:skysoft/constants/config.dart';
 import 'package:skysoft/providers/dispenser_provider.dart';
 import 'package:skysoft/screens/dispenser_reading.dart';
-import 'package:skysoft/screens/generate_invoice.dart';
 import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/dispenser_menu.dart';
-import 'package:skysoft/widgets/home_menu.dart';
 import 'package:provider/provider.dart';
 import 'package:skysoft/widgets/snackbars.dart';
 
@@ -41,7 +39,7 @@ class _DispenserHomePageState extends State<DispenserHomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor:const Color.fromRGBO(176, 35, 65, 1),
+        backgroundColor: const Color.fromRGBO(176, 35, 65, 1),
         elevation: 0.0,
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
@@ -98,36 +96,6 @@ class _DispenserHomePageState extends State<DispenserHomePage> {
               },
             );
           },
-          // children: [
-          //   DispenserMenu(
-          //     onTap: () {
-          //       Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //           builder: (context) => DispenserReadingPage(),
-          //         ),
-          //       );
-          //     },
-          //     title: "Dispenser 1",
-          //     color: const Color.fromRGBO(176, 35, 65, 1),
-          //     icon: Icons.copy_all,
-          //   ),
-          //   DispenserMenu(
-          //     title: "Dispenser 2",
-          //     color: const Color.fromRGBO(176, 35, 65, 1),
-          //     icon: Icons.copy_all,
-          //   ),
-          //   DispenserMenu(
-          //     title: "Dispenser 3",
-          //     color: Color.fromRGBO(176, 35, 65, 1),
-          //     icon: Icons.copy_all,
-          //   ),
-          //   DispenserMenu(
-          //     title: "Dispenser 4",
-          //     color: Color.fromRGBO(176, 35, 65, 1),
-          //     icon: Icons.copy_all,
-          //   )
-          // ],
         );
       }),
     );

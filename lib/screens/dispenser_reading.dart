@@ -49,8 +49,7 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
       }
       var prevReading =
           context.read<InvoiceProvider>().previouseDispenserReading;
-        startReading.text = prevReading.toString();
-      
+      startReading.text = prevReading.toString();
     });
     super.initState();
   }
@@ -129,7 +128,6 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
               SizedBox(height: _ac!.rHP(2)),
               const Text(
                 "End Reading",
-                
                 style: TextStyle(
                     fontFamily: "OpenSans", fontWeight: FontWeight.w700),
               ),
@@ -159,6 +157,39 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
                   isLoading: provider.uploadReadingStatus == Status.LOADING,
                   title: "Submit",
                   onTap: () async {
+                    // check start reading is empty
+                    if (endReading.text.isEmpty) {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text(
+                              "Error",
+                              style: TextStyle(
+                                fontFamily: "OpenSans",
+                                color: Color.fromRGBO(176, 35, 65, 1),
+                              ),
+                            ),
+                            content: const Text(
+                              "Please Enter End Reading",
+                              style: TextStyle(
+                                fontFamily: "OpenSans",
+                              ),
+                            ),
+                            actions: [
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("OK"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                      return;
+                    }
+
                     Status result =
                         await context.read<DispenserProvider>().uploadReading(
                               payableAmount: totalAmount.toString(),

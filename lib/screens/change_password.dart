@@ -109,35 +109,124 @@ class ChangePassword extends StatelessWidget {
                           email: emailController.text,
                           password: newpasswordController.text);
                       if (result == Status.SUCCESS) {
-                        //show success snackbar and exit
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Password changed successfully"),
-                          ),
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text(
+                                "Success",
+                                style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  color: Color.fromRGBO(176, 35, 65, 1),
+                                ),
+                              ),
+                              content: const Text(
+                                "Password changed successfully",
+                                style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                ),
+                              ),
+                              actions: [
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("OK"),
+                                ),
+                              ],
+                            );
+                          },
                         );
-                        Navigator.of(context).pop();
                       } else {
-                        //show error snackbar
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                                "An error occurred while changing password"),
-                          ),
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text(
+                                "Error",
+                                style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  color: Color.fromRGBO(176, 35, 65, 1),
+                                ),
+                              ),
+                              content: const Text(
+                                "An error occured while changing password",
+                                style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                ),
+                              ),
+                              actions: [
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text("OK"),
+                                ),
+                              ],
+                            );
+                          },
                         );
                       }
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Password does not match"),
-                        ),
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text(
+                              "Error",
+                              style: TextStyle(
+                                fontFamily: "OpenSans",
+                                color: Color.fromRGBO(176, 35, 65, 1),
+                              ),
+                            ),
+                            content: const Text(
+                              "Password does not match",
+                              style: TextStyle(
+                                fontFamily: "OpenSans",
+                              ),
+                            ),
+                            actions: [
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("OK"),
+                              ),
+                            ],
+                          );
+                        },
                       );
                     }
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Please fill all the fields"),
-                        ),
-                      );
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text(
+                            "Error",
+                            style: TextStyle(
+                              fontFamily: "OpenSans",
+                              color: Color.fromRGBO(176, 35, 65, 1),
+                            ),
+                          ),
+                          content: const Text(
+                            "Please fill all the fields",
+                            style: TextStyle(
+                              fontFamily: "OpenSans",
+                            ),
+                          ),
+                          actions: [
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   }
                 },
               ),
