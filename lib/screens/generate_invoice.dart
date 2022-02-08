@@ -11,6 +11,7 @@ import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_selector.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
+import 'package:skysoft/widgets/dialogs.dart';
 import 'package:skysoft/widgets/snackbars.dart';
 import 'package:skysoft/widgets/titled_textfield.dart';
 import 'package:provider/provider.dart';
@@ -164,30 +165,10 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                 onTap: () async {
                   //check if fuel is selected
                   if (_selectedFuel == null) {
-                    showDialog(
+                    showResponseDialog(
                       context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text(
-                            "Error",
-                            style: TextStyle(
-                              fontFamily: "OpenSans",
-                              color: Color.fromRGBO(176, 35, 65, 1),
-                            ),
-                          ),
-                          content: const Text("Please select Fuel",style: TextStyle(
-                                fontFamily: "OpenSans",
-                              ),),
-                          actions: [
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text("OK"),
-                            ),
-                          ],
-                        );
-                      },
+                      title: "Error",
+                      content: "Please select fuel",
                     );
                     return;
                   }
@@ -196,30 +177,10 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
 
                   //check if quantity is entered
                   if (qtyController.text == 0.0.toString()) {
-                    showDialog(
+                    showResponseDialog(
                       context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text(
-                            "Error",
-                            style: TextStyle(
-                              fontFamily: "OpenSans",
-                              color: Color.fromRGBO(176, 35, 65, 1),
-                            ),
-                          ),
-                          content: const Text("Please enter quantity",style: TextStyle(
-                                fontFamily: "OpenSans",
-                              ),),
-                          actions: [
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text("OK"),
-                            ),
-                          ],
-                        );
-                      },
+                      title: "Error",
+                      content: "Please enter Quantity filed",
                     );
                     return;
                   }

@@ -6,6 +6,7 @@ import 'package:skysoft/screens/login_page.dart';
 import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
+import 'package:skysoft/widgets/dialogs.dart';
 
 class ForgotPassword extends StatelessWidget {
   ForgotPassword({Key? key}) : super(key: key);
@@ -78,93 +79,26 @@ class ForgotPassword extends StatelessWidget {
                         await provider.sendOTP(email: emailController.text);
                     if (result == Status.SUCCESS) {
                       //show success alert dialog
-                      showDialog(
+                      showResponseDialog(
                         context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text(
-                              "Success",
-                              style: TextStyle(
-                                fontFamily: "OpenSans",
-                                color: Color.fromRGBO(176, 35, 65, 1),
-                              ),
-                            ),
-                            content: const Text(
-                              "OTP has been sent to your email, please check your email and enter the OTP",
-                              style: TextStyle(
-                                fontFamily: "OpenSans",
-                              ),
-                            ),
-                            actions: [
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text("OK"),
-                              ),
-                            ],
-                          );
-                        },
+                        title: "Success",
+                        content:
+                            "OTP has been sent to your email, please check your email",
                       );
                     } else {
                       //show error alert dialog
-                      showDialog(
+                      showResponseDialog(
                         context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text(
-                              "Error",
-                              style: TextStyle(
-                                fontFamily: "OpenSans",
-                                color: Color.fromRGBO(176, 35, 65, 1),
-                              ),
-                            ),
-                            content: const Text(
-                              "An error occured while sending OTP, please try again",
-                              style: TextStyle(
-                                fontFamily: "OpenSans",
-                              ),
-                            ),
-                            actions: [
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text("OK"),
-                              ),
-                            ],
-                          );
-                        },
+                        title: "Error",
+                        content:
+                            "An error occured while sending OTP, please try again",
                       );
                     }
                   } else {
-                    showDialog(
+                    showResponseDialog(
                       context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text(
-                            "Error",
-                            style: TextStyle(
-                              fontFamily: "OpenSans",
-                              color: Color.fromRGBO(176, 35, 65, 1),
-                            ),
-                          ),
-                          content: const Text(
-                            "Please enter email address",
-                            style: TextStyle(
-                              fontFamily: "OpenSans",
-                            ),
-                          ),
-                          actions: [
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text("OK"),
-                            ),
-                          ],
-                        );
-                      },
+                      title: "Error",
+                      content: "Please fill Email field",
                     );
                   }
                 },
@@ -212,99 +146,26 @@ class ForgotPassword extends StatelessWidget {
                         otp: otpController.text,
                         password: passwordController.text);
                     if (result == Status.SUCCESS) {
-                      showDialog(
+                      showResponseDialog(
                         context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text(
-                              "Success",
-                              style: TextStyle(
-                                fontFamily: "OpenSans",
-                                color: Color.fromRGBO(176, 35, 65, 1),
-                              ),
-                            ),
-                            content: const Text(
-                              "Password has been changed successfully",
-                              style: TextStyle(
-                                fontFamily: "OpenSans",
-                              ),
-                            ),
-                            actions: [
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => LoginPage(),
-                                      ),
-                                      (route) => false);
-                                },
-                                child: const Text("OK"),
-                              ),
-                            ],
-                          );
-                        },
+                        title: "Success",
+                        content: "Password has been changed successfully",
+                        forceQuit: true,
                       );
                     } else {
                       //show error snackbar
-                      showDialog(
+                      showResponseDialog(
                         context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text(
-                              "Error",
-                              style: TextStyle(
-                                fontFamily: "OpenSans",
-                                color: Color.fromRGBO(176, 35, 65, 1),
-                              ),
-                            ),
-                            content: const Text(
-                              "An error occured while changing password, please try again",
-                              style: TextStyle(
-                                fontFamily: "OpenSans",
-                              ),
-                            ),
-                            actions: [
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text("OK"),
-                              ),
-                            ],
-                          );
-                        },
+                        title: "Error",
+                        content:
+                            "An error occured while changing password, please try again",
                       );
                     }
                   } else {
-                    showDialog(
+                    showResponseDialog(
                       context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text(
-                            "Error",
-                            style: TextStyle(
-                              fontFamily: "OpenSans",
-                              color: Color.fromRGBO(176, 35, 65, 1),
-                            ),
-                          ),
-                          content: const Text(
-                            "Please enter OTP and new password",
-                            style: TextStyle(
-                              fontFamily: "OpenSans",
-                            ),
-                          ),
-                          actions: [
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text("OK"),
-                            ),
-                          ],
-                        );
-                      },
+                      title: "Error",
+                      content: "Please enter OTP and Password",
                     );
                   }
                 },

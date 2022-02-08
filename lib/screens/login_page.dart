@@ -8,6 +8,7 @@ import 'package:skysoft/screens/home_page.dart';
 import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
+import 'package:skysoft/widgets/dialogs.dart';
 import 'package:skysoft/widgets/dropdown_widget.dart';
 
 class LoginPage extends StatefulWidget {
@@ -156,62 +157,16 @@ class _LoginPageState extends State<LoginPage> {
             onTap: () async {
               //validate username and password
               if (_username.text.isEmpty) {
-                showDialog(
+                showResponseDialog(
                   context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text(
-                        "Error",
-                        style: TextStyle(
-                          fontFamily: "OpenSans",
-                          color: Color.fromRGBO(176, 35, 65, 1),
-                        ),
-                      ),
-                      content: const Text(
-                        "Username is required",
-                        style: TextStyle(
-                          fontFamily: "OpenSans",
-                        ),
-                      ),
-                      actions: [
-                        FlatButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("OK"),
-                        ),
-                      ],
-                    );
-                  },
+                  title: "Error",
+                  content: "Username is required",
                 );
               } else if (_password.text.isEmpty) {
-                showDialog(
+                showResponseDialog(
                   context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text(
-                        "Error",
-                        style: TextStyle(
-                          fontFamily: "OpenSans",
-                          color: Color.fromRGBO(176, 35, 65, 1),
-                        ),
-                      ),
-                      content: const Text(
-                        "Password is required",
-                        style: TextStyle(
-                          fontFamily: "OpenSans",
-                        ),
-                      ),
-                      actions: [
-                        FlatButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("OK"),
-                        ),
-                      ],
-                    );
-                  },
+                  title: "Error",
+                  content: "Password is required",
                 );
               } else {
                 Status result =
@@ -220,18 +175,21 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomePage(),
+                      builder: (context) => const HomePage(),
                     ),
                     (route) => false,
                   );
                 } else if (result == Status.TIMEOUT) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Session Timout!")),
+                  showResponseDialog(
+                    context: context,
+                    title: "Oops",
+                    content: "Session Timeout!",
                   );
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text("Somethig went wrong try agian")),
+                  showResponseDialog(
+                    context: context,
+                    title: "Error",
+                    content: "Something went wrong, please try again later",
                   );
                 }
               }

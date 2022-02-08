@@ -10,6 +10,7 @@ import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_selector.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
+import 'package:skysoft/widgets/dialogs.dart';
 import 'package:skysoft/widgets/snackbars.dart';
 import 'package:skysoft/widgets/titled_textfield.dart';
 
@@ -159,33 +160,10 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
                   onTap: () async {
                     // check start reading is empty
                     if (endReading.text.isEmpty) {
-                      showDialog(
+                      showResponseDialog(
                         context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text(
-                              "Error",
-                              style: TextStyle(
-                                fontFamily: "OpenSans",
-                                color: Color.fromRGBO(176, 35, 65, 1),
-                              ),
-                            ),
-                            content: const Text(
-                              "Please Enter End Reading",
-                              style: TextStyle(
-                                fontFamily: "OpenSans",
-                              ),
-                            ),
-                            actions: [
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text("OK"),
-                              ),
-                            ],
-                          );
-                        },
+                        title: "Error",
+                        content: "Please fill 'End Reading' field",
                       );
                       return;
                     }
@@ -200,18 +178,23 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
                               fuelStock: _selectedFuel!.currentStock,
                             );
                     if (result == Status.SUCCESS) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Upload Success")),
+                      showResponseDialog(
+                        context: context,
+                        title: "Success",
+                        content: "Dispenser Reading successfully submitted",
+                        forceQuit: true,
                       );
-                      Navigator.pop(context);
                     } else if (result == Status.TIMEOUT) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Session Timout!")),
+                      showResponseDialog(
+                        context: context,
+                        title: "Oops",
+                        content: "Session Timeout",
                       );
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text("Somethig went wrong try agian")),
+                      showResponseDialog(
+                        context: context,
+                        title: "Error",
+                        content: "Something went wrong, please try again later",
                       );
                     }
                   },

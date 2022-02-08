@@ -5,6 +5,7 @@ import 'package:skysoft/providers/auth_provider.dart';
 import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
+import 'package:skysoft/widgets/dialogs.dart';
 
 class ChangePassword extends StatelessWidget {
   ChangePassword({Key? key}) : super(key: key);
@@ -109,123 +110,31 @@ class ChangePassword extends StatelessWidget {
                           email: emailController.text,
                           password: newpasswordController.text);
                       if (result == Status.SUCCESS) {
-                        showDialog(
+                        showResponseDialog(
                           context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text(
-                                "Success",
-                                style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                  color: Color.fromRGBO(176, 35, 65, 1),
-                                ),
-                              ),
-                              content: const Text(
-                                "Password changed successfully",
-                                style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                ),
-                              ),
-                              actions: [
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text("OK"),
-                                ),
-                              ],
-                            );
-                          },
+                          title: "Success",
+                          content: "Password changed successfully",
+                          forceQuit: true,
                         );
                       } else {
-                        showDialog(
+                        showResponseDialog(
                           context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text(
-                                "Error",
-                                style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                  color: Color.fromRGBO(176, 35, 65, 1),
-                                ),
-                              ),
-                              content: const Text(
-                                "An error occured while changing password",
-                                style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                ),
-                              ),
-                              actions: [
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text("OK"),
-                                ),
-                              ],
-                            );
-                          },
+                          title: "Error",
+                          content: "An error occured while changing password",
                         );
                       }
                     } else {
-                      showDialog(
+                      showResponseDialog(
                         context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text(
-                              "Error",
-                              style: TextStyle(
-                                fontFamily: "OpenSans",
-                                color: Color.fromRGBO(176, 35, 65, 1),
-                              ),
-                            ),
-                            content: const Text(
-                              "Password does not match",
-                              style: TextStyle(
-                                fontFamily: "OpenSans",
-                              ),
-                            ),
-                            actions: [
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text("OK"),
-                              ),
-                            ],
-                          );
-                        },
+                        title: "Error",
+                        content: "Password does not match",
                       );
                     }
                   } else {
-                    showDialog(
+                    showResponseDialog(
                       context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text(
-                            "Error",
-                            style: TextStyle(
-                              fontFamily: "OpenSans",
-                              color: Color.fromRGBO(176, 35, 65, 1),
-                            ),
-                          ),
-                          content: const Text(
-                            "Please fill all the fields",
-                            style: TextStyle(
-                              fontFamily: "OpenSans",
-                            ),
-                          ),
-                          actions: [
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text("OK"),
-                            ),
-                          ],
-                        );
-                      },
+                      title: "Error",
+                      content: "Please fill all the fields",
                     );
                   }
                 },
