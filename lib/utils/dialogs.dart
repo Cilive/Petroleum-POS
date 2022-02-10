@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skysoft/constants/colors.dart';
 
 showResponseDialog(
     {required BuildContext context,
@@ -15,7 +16,7 @@ showResponseDialog(
           title,
           style: const TextStyle(
             fontFamily: "OpenSans",
-            color: Color.fromRGBO(176, 35, 65, 1),
+            color:kPrimaryColor,
           ),
         ),
         content: Text(

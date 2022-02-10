@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/utils/config.dart';
 
 class HomeMenu extends StatelessWidget {
   final String? title;
@@ -46,7 +46,7 @@ class HomeMenu extends StatelessWidget {
               Text(
                 "$title",
                 style: TextStyle(
-                  color: Colors.white,
+                    color: Colors.white,
                     fontFamily: "OpenSans",
                     fontSize: _ac!.rWP(4.5),
                     fontWeight: FontWeight.w700),
@@ -54,14 +54,20 @@ class HomeMenu extends StatelessWidget {
               ),
               SizedBox(
                 width: _ac!.rW(10),
-                child: Divider(
+                child: const Divider(
                   thickness: 3,
                   color: Colors.white30,
                 ),
               ),
               SizedBox(height: _ac!.rHP(1)),
               Row(
-                children: [Spacer(), Icon(Icons.arrow_forward,color: Colors.white,)],
+                children: const [
+                  Spacer(),
+                  Icon(
+                    Icons.arrow_forward,
+                    color: Colors.white,
+                  )
+                ],
               )
             ],
           ),

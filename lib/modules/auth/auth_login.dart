@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
-import 'package:skysoft/screens/forgot_password.dart';
-import 'package:skysoft/screens/home_page.dart';
+import 'package:skysoft/modules/settings/password_forgot.dart';
+import 'package:skysoft/modules/home/home_page.dart';
 import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
-import 'package:skysoft/widgets/dialogs.dart';
+import 'package:skysoft/utils/dialogs.dart';
 import 'package:skysoft/widgets/dropdown_widget.dart';
 
 class LoginPage extends StatefulWidget {
@@ -19,9 +20,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  PageController _pageController = PageController(initialPage: 0);
-  TextEditingController _username = TextEditingController();
-  TextEditingController _password = TextEditingController();
+  final PageController _pageController = PageController(initialPage: 0);
+  final TextEditingController _username = TextEditingController();
+  final TextEditingController _password = TextEditingController();
   AppConfig? _ac;
 
   @override
@@ -30,8 +31,8 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Container(
+        physics: const BouncingScrollPhysics(),
+        child: SizedBox(
           height: _ac!.rH(100),
           width: _ac!.rW(100),
           child: Column(
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(
                           fontFamily: "OpenSans",
                           fontWeight: FontWeight.w700,
-                          color: Colors.white,
+                          color: kPrimaryTextColor,
                           decoration: TextDecoration.underline,
                         ),
                       ),
@@ -71,9 +72,10 @@ class _LoginPageState extends State<LoginPage> {
               const Text(
                 "2021 ForeTech.pw, All Right Reserved",
                 style: TextStyle(
-                    fontFamily: "OpenSans",
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey),
+                  fontFamily: "OpenSans",
+                  fontWeight: FontWeight.w600,
+                  color: kSecondaryColor,
+                ),
               ),
               SizedBox(height: _ac!.rH(2)),
             ],
@@ -216,10 +218,11 @@ class _LoginPageState extends State<LoginPage> {
         Text(
           "SkySoft",
           style: TextStyle(
-              fontFamily: "OpenSans",
-              fontSize: _ac!.rHP(5),
-              fontWeight: FontWeight.w900,
-              color: const Color.fromRGBO(176, 35, 65, 1)),
+            fontFamily: "OpenSans",
+            fontSize: _ac!.rHP(5),
+            fontWeight: FontWeight.w900,
+            color: kPrimaryColor,
+          ),
         )
       ],
     );

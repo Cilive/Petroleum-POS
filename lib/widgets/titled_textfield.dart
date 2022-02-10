@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/utils/config.dart';
 
 class TitledTextfield extends StatelessWidget {
   final String? title;
@@ -61,7 +62,7 @@ class TitledTextfield extends StatelessWidget {
                       fontSize: 16,
                       fontFamily: "OpenSans",
                       fontWeight: FontWeight.w700,
-                      color: Color.fromRGBO(176, 35, 65, 1),
+                      color: kPrimaryColor,
                     ),
                     textAlign: TextAlign.end,
                     controller: controller,
@@ -72,7 +73,7 @@ class TitledTextfield extends StatelessWidget {
                         fontSize: 14,
                         fontFamily: "OpenSans",
                         fontWeight: FontWeight.w700,
-                        color: Color.fromRGBO(176, 35, 65, 1),
+                        color: kPrimaryColor,
                       ),
                       border: InputBorder.none,
                       contentPadding: const EdgeInsets.only(left: 10),

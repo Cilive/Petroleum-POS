@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
-import 'package:skysoft/screens/dispenser_home.dart';
-import 'package:skysoft/screens/generate_invoice.dart';
-import 'package:skysoft/screens/settings.dart';
+import 'package:skysoft/modules/dispenser/dispenser_home.dart';
+import 'package:skysoft/modules/invoice/invoice_generation.dart';
+import 'package:skysoft/modules/settings/settings.dart';
 import 'package:skysoft/widgets/home_menu.dart';
 import 'package:provider/provider.dart';
 
@@ -26,18 +27,18 @@ class _HomePageState extends State<HomePage> {
         return val!;
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: kBackgroundColor,
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(176, 35, 65, 1),
+          backgroundColor: kPrimaryColor,
           elevation: 0.0,
-          iconTheme: const IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: kPrimaryTextColor),
           title: const Text(
             "Home",
             style: TextStyle(
               fontSize: 16,
               fontFamily: "OpenSans",
               fontWeight: FontWeight.w700,
-              color: Colors.white,
+              color: kPrimaryTextColor,
             ),
           ),
           actions: [
@@ -46,13 +47,13 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Settings(),
+                    builder: (context) => const Settings(),
                   ),
                 );
               },
               icon: const Icon(
                 Icons.settings,
-                color: Colors.white,
+                color: kPrimaryTextColor,
               ),
             )
           ],
@@ -68,44 +69,42 @@ class _HomePageState extends State<HomePage> {
   Widget _bodySection() {
     return Padding(
       padding: EdgeInsets.all(_ac!.rWP(4)),
-      child: Container(
-        child: GridView(
-          gridDelegate: SliverGrid.count(
-            crossAxisCount: 2,
-            childAspectRatio: _ac!.rH(2.5) / _ac!.rW(5.6),
-            crossAxisSpacing: _ac!.rWP(5),
-            mainAxisSpacing: _ac!.rWP(5),
-          ).gridDelegate,
-          children: [
-            HomeMenu(
-              title: "Generate\nInvoice",
-              icon: Icons.print_outlined,
-              color: const Color.fromRGBO(176, 35, 65, 1),
-              onTap: () async {
-                // await context.read<AuthProvider>().refreshToken();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => GenerateInvoicePage(),
-                  ),
-                );
-              },
-            ),
-            HomeMenu(
-              title: "Dispenser\nReading",
-              icon: Icons.copy_all,
-              color: Color.fromRGBO(176, 35, 65, 1),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DispenserHomePage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
+      child: GridView(
+        gridDelegate: SliverGrid.count(
+          crossAxisCount: 2,
+          childAspectRatio: _ac!.rH(2.5) / _ac!.rW(5.6),
+          crossAxisSpacing: _ac!.rWP(5),
+          mainAxisSpacing: _ac!.rWP(5),
+        ).gridDelegate,
+        children: [
+          HomeMenu(
+            title: "Generate\nInvoice",
+            icon: Icons.print_outlined,
+            color: kPrimaryColor,
+            onTap: () async {
+              // await context.read<AuthProvider>().refreshToken();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const GenerateInvoicePage(),
+                ),
+              );
+            },
+          ),
+          HomeMenu(
+            title: "Dispenser\nReading",
+            icon: Icons.copy_all,
+            color: kPrimaryColor,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DispenserHomePage(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
@@ -120,7 +119,7 @@ class _HomePageState extends State<HomePage> {
             'Are you sure?',
             style: TextStyle(
               fontFamily: "OpenSans",
-              color: Color.fromRGBO(176, 35, 65, 1),
+              color: kPrimaryColor,
             ),
           ),
           content: const Text('Do you want to exit an App'),

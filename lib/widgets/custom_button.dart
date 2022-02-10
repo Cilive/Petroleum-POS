@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/utils/config.dart';
 
 class CustomButton extends StatelessWidget {
   final String? title;
@@ -35,7 +36,9 @@ class CustomButton extends StatelessWidget {
             decoration: BoxDecoration(
               color: isLoading!
                   ? Colors.black12
-                  : isEnabled! ? const Color.fromRGBO(176, 35, 65, 1) : Colors.grey,
+                  : isEnabled!
+                      ? kPrimaryColor
+                      : Colors.grey,
               borderRadius: BorderRadius.circular(7),
             ),
             child: Center(
@@ -46,7 +49,7 @@ class CustomButton extends StatelessWidget {
                       style: const TextStyle(
                         fontFamily: "OpenSans",
                         fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                        color: kPrimaryTextColor,
                       ),
                     ),
             ),

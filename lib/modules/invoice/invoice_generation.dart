@@ -1,18 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/models/fuel.dart';
 import 'package:skysoft/models/info.dart';
 import 'package:skysoft/models/invoice.dart';
 import 'package:skysoft/providers/general_provider.dart';
 import 'package:skysoft/providers/invoice_provider.dart';
-import 'package:skysoft/screens/view_invoice.dart';
+import 'package:skysoft/modules/invoice/invoice_view.dart';
 import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_selector.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
-import 'package:skysoft/widgets/dialogs.dart';
-import 'package:skysoft/widgets/snackbars.dart';
+import 'package:skysoft/utils/dialogs.dart';
+import 'package:skysoft/utils/snackbars.dart';
 import 'package:skysoft/widgets/titled_textfield.dart';
 import 'package:provider/provider.dart';
 
@@ -57,18 +58,18 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
   Widget build(BuildContext context) {
     _ac = AppConfig(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(176, 35, 65, 1),
+        backgroundColor: kPrimaryColor,
         elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: kPrimaryTextColor),
         title: const Text(
           "Generate Invoice",
           style: TextStyle(
             fontSize: 16,
             fontFamily: "OpenSans",
             fontWeight: FontWeight.w700,
-            color: Colors.white,
+            color: kPrimaryTextColor,
           ),
         ),
       ),

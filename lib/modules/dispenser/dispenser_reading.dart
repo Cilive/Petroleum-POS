@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/models/dispenser.dart';
 import 'package:skysoft/models/fuel.dart';
 import 'package:skysoft/providers/dispenser_provider.dart';
@@ -10,8 +11,8 @@ import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_selector.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
-import 'package:skysoft/widgets/dialogs.dart';
-import 'package:skysoft/widgets/snackbars.dart';
+import 'package:skysoft/utils/dialogs.dart';
+import 'package:skysoft/utils/snackbars.dart';
 import 'package:skysoft/widgets/titled_textfield.dart';
 
 class DispenserReadingPage extends StatefulWidget {
@@ -59,18 +60,18 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
   Widget build(BuildContext context) {
     _ac = AppConfig(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(176, 35, 65, 1),
+        backgroundColor: kPrimaryColor,
         elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: kPrimaryTextColor),
         title: const Text(
           "Dispenser Reading",
           style: TextStyle(
             fontSize: 16,
             fontFamily: "OpenSans",
             fontWeight: FontWeight.w700,
-            color: Colors.white,
+            color: kPrimaryTextColor,
           ),
         ),
       ),

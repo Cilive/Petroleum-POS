@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
 import 'package:skysoft/utils/enums.dart';
 import 'package:skysoft/widgets/custom_button.dart';
 import 'package:skysoft/widgets/custom_textfield.dart';
-import 'package:skysoft/widgets/dialogs.dart';
+import 'package:skysoft/utils/dialogs.dart';
 
 class ChangePassword extends StatelessWidget {
   ChangePassword({Key? key}) : super(key: key);
@@ -19,18 +20,18 @@ class ChangePassword extends StatelessWidget {
   Widget build(BuildContext context) {
     _ac = AppConfig(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(176, 35, 65, 1),
+        backgroundColor: kPrimaryColor,
         elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: kPrimaryTextColor),
         title: const Text(
           "Change Password",
           style: TextStyle(
             fontSize: 16,
             fontFamily: "OpenSans",
             fontWeight: FontWeight.w700,
-            color: Colors.white,
+            color: kPrimaryTextColor,
           ),
         ),
       ),
@@ -151,7 +152,7 @@ class ChangePassword extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: "OpenSans",
                         fontWeight: FontWeight.w600,
-                        color: Colors.grey,
+                        color: kSecondaryColor,
                       ),
                       textAlign: TextAlign.center,
                     ),

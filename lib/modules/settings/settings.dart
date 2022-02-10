@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
-import 'package:skysoft/screens/change_password.dart';
-import 'package:skysoft/screens/forgot_password.dart';
-import 'package:skysoft/screens/login_page.dart';
+import 'package:skysoft/modules/settings/password_change.dart';
+import 'package:skysoft/modules/settings/password_forgot.dart';
+import 'package:skysoft/modules/auth/auth_login.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -19,18 +20,18 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     _ac = AppConfig(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor:kPrimaryColor,
         elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.black87),
+        iconTheme: const IconThemeData(color: kPrimaryTextColor),
         title: const Text(
           "Settings",
           style: TextStyle(
             fontSize: 16,
             fontFamily: "OpenSans",
             fontWeight: FontWeight.w700,
-            color: Colors.black87,
+            color:kPrimaryTextColor,
           ),
         ),
       ),
@@ -47,21 +48,21 @@ class _SettingsState extends State<Settings> {
         children: [
           ListTile(
             title: const Text("Language"),
-            leading: const Icon(Icons.language,color: Color.fromRGBO(176, 35, 65, 1)),
+            leading: const Icon(Icons.language,color: kPrimaryColor),
             onTap: () async {
               
             },
           ),
           ListTile(
             title: const Text("Defualt Printer"),
-            leading: const Icon(Icons.print,color: Color.fromRGBO(176, 35, 65, 1)),
+            leading: const Icon(Icons.print,color: kPrimaryColor),
             onTap: () async {
               
             },
           ),
           ListTile(
             title: const Text("Logout"),
-            leading: const Icon(Icons.logout,color: Color.fromRGBO(176, 35, 65, 1)),
+            leading: const Icon(Icons.logout,color: kPrimaryColor),
             onTap: () async {
               Provider.of<AuthProvider>(context, listen: false).logout();
               Navigator.pushAndRemoveUntil(
@@ -75,7 +76,7 @@ class _SettingsState extends State<Settings> {
           ),
           ListTile(
             title: const Text("Change Password"),
-            leading: const Icon(Icons.lock,color: Color.fromRGBO(176, 35, 65, 1)),
+            leading: const Icon(Icons.lock,color: kPrimaryColor),
             onTap: () async {
               Navigator.push(
                 context,
@@ -93,7 +94,7 @@ class _SettingsState extends State<Settings> {
             style: TextStyle(
                 fontFamily: "OpenSans",
                 fontWeight: FontWeight.w600,
-                color: Colors.grey),
+                color: kSecondaryColor),
           ),
           SizedBox(height: _ac!.rH(2)),
         ],

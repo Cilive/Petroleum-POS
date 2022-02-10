@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/utils/config.dart';
 
 class DispenserMenu extends StatelessWidget {
   final String? title;
@@ -36,7 +37,7 @@ class DispenserMenu extends StatelessWidget {
                     width: _ac!.rH(5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: Colors.white,
+                      color: kPrimaryTextColor,
                     ),
                     child: Icon(
                       icon,
@@ -51,7 +52,7 @@ class DispenserMenu extends StatelessWidget {
                 "$title",
                 style: TextStyle(
                     fontFamily: "OpenSans",
-                    color: Colors.white,
+                    color: kPrimaryTextColor,
                     fontSize: _ac!.rWP(3.5),
                     fontWeight: FontWeight.w700),
                 textAlign: TextAlign.start,

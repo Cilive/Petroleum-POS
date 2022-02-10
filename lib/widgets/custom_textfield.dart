@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/utils/config.dart';
 
 class CustomTextfield extends StatelessWidget {
   final String? title;
@@ -31,7 +32,7 @@ class CustomTextfield extends StatelessWidget {
         Container(
           width: _ac!.rW(100),
           decoration: BoxDecoration(
-            color: const Color.fromRGBO(246, 246, 246, 1),
+            color: kSecondaryLiteColor,
             borderRadius: BorderRadius.circular(7),
           ),
           child: Padding(
@@ -55,7 +56,7 @@ class CustomTextfield extends StatelessWidget {
                   fontSize: 13,
                   fontFamily: "OpenSans",
                   fontWeight: FontWeight.w700,
-                  color: Color.fromRGBO(183, 183, 183, 1),
+                  color: kSecondaryColor,
                 ),
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.only(left: 10),

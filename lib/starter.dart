@@ -1,16 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:skysoft/screens/home_page.dart';
-import 'package:skysoft/screens/login_page.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/modules/home/home_page.dart';
+import 'package:skysoft/modules/auth/auth_login.dart';
 
-class Splash extends StatefulWidget {
-  const Splash({Key? key}) : super(key: key);
+class Starter extends StatefulWidget {
+  const Starter({Key? key}) : super(key: key);
 
   @override
-  _SplashState createState() => _SplashState();
+  _StarterState createState() => _StarterState();
 }
 
-class _SplashState extends State<Splash> {
+class _StarterState extends State<Starter> {
 
   Future<bool> checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -46,11 +48,9 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColor,
       body: Center(
-        child: CircularProgressIndicator(
-          color: Color.fromRGBO(176, 35, 65, 1),
-        ),
+        child: CupertinoActivityIndicator(),
       ),
     );
   }

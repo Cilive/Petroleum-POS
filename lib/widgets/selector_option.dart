@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/utils/config.dart';
 
 class SelectorOption extends StatelessWidget {
   final String? title;

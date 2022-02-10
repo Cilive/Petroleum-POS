@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/models/fuel.dart';
 import 'package:skysoft/models/info.dart';
 import 'package:skysoft/models/invoice.dart';
 import 'package:skysoft/providers/invoice_provider.dart';
 import 'package:skysoft/utils/enums.dart';
-import 'package:skysoft/widgets/invoice_widget.dart';
-import 'package:skysoft/widgets/snackbars.dart';
+import 'package:skysoft/modules/invoice/invoice_widget.dart';
+import 'package:skysoft/utils/snackbars.dart';
 
 class ViewInvoice extends StatelessWidget {
   final Invoice invoice;
@@ -28,18 +29,18 @@ class ViewInvoice extends StatelessWidget {
   Widget build(BuildContext context) {
     _ac = AppConfig(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(176, 35, 65, 1),
+        backgroundColor: kPrimaryColor,
         elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: kPrimaryTextColor),
         title: const Text(
           "Invoice",
           style: TextStyle(
             fontSize: 16,
             fontFamily: "OpenSans",
             fontWeight: FontWeight.w700,
-            color: Colors.white,
+            color: kPrimaryTextColor,
           ),
         ),
       ),
@@ -60,7 +61,7 @@ class ViewInvoice extends StatelessWidget {
                       "Saved",
                       style: TextStyle(
                         fontFamily: "OpenSans",
-                        color: Color.fromRGBO(176, 35, 65, 1),
+                        color: kPrimaryColor,
                       ),
                     ),
                     content: SizedBox(
@@ -102,7 +103,7 @@ class ViewInvoice extends StatelessWidget {
           child: provider.invoiceSaveStatus == Status.LOADING
               ? const CupertinoActivityIndicator()
               : const Icon(Icons.save),
-          backgroundColor: const Color.fromRGBO(176, 35, 65, 1),
+          backgroundColor: kPrimaryColor,
         );
       }),
       body: SizedBox(

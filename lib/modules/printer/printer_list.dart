@@ -4,7 +4,8 @@ import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart';
 import 'package:intl/intl.dart';
-import 'package:skysoft/constants/config.dart';
+import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/utils/config.dart';
 import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 import 'package:flutter/services.dart';
 
@@ -25,15 +26,16 @@ class _PrinterListState extends State<PrinterList> {
   void initPrinter() {
     print('init printer');
 
-    printerManager.startScan(Duration(seconds: 2));
+    printerManager.startScan(const Duration(seconds: 2));
     printerManager.scanResults.listen((event) {
       if (!mounted) return;
       setState(() => _devices = event);
 
-      if (_devices.isEmpty)
+      if (_devices.isEmpty) {
         setState(() {
           _devicesMsg = 'No devices';
         });
+      }
     });
   }
 
@@ -64,20 +66,20 @@ class _PrinterListState extends State<PrinterList> {
   Widget build(BuildContext context) {
     _ac = AppConfig(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
         actions: [
           IconButton(
             onPressed: () {
               initPrinter();
             },
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
           )
         ],
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.black87),
-        title: Text(
+        iconTheme: const IconThemeData(color: Colors.black87),
+        title: const Text(
           "Available Printers",
           style: TextStyle(
             fontSize: 16,
