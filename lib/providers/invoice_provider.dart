@@ -101,7 +101,7 @@ class InvoiceProvider extends ChangeNotifier {
     _setInvoiceGenerateStatus(Status.LOADING);
     String responseMessage = '';
     Invoice invoice = Invoice();
-    // try {
+    try {
     PrefData data = await prefService.getPrefData();
     dio.interceptors.add(AuthIntercepter());
     Response response = await dio.post(
@@ -124,20 +124,24 @@ class InvoiceProvider extends ChangeNotifier {
       if (response.data['msg'].toString() == 'Success') {
         invoice = Invoice.fromJson(response.data['data']);
         responseMessage = response.data['msg'];
-        await context.read<GebneralProvider>().getCompanyData();
+        await context.read<GeneralProvider>().getCompanyData();
         _setInvoiceGenerateStatus(Status.SUCCESS);
       } else {
         responseMessage = response.data['msg'];
         _setInvoiceGenerateStatus(Status.FAILED);
       }
-    } else {
+    } else if(response.statusCode == 403){
+      responseMessage = "Session does not opened yet";
+      _setInvoiceGenerateStatus(Status.FAILED);
+    }
+     else {
       responseMessage = "Something went wrong : ${response.statusCode}";
       _setInvoiceGenerateStatus(Status.FAILED);
     }
-    // } catch (e) {
-    //   responseMessage = "Something went wrong : ${e.toString()}";
-    //   _setInvoiceGenerateStatus(Status.FAILED);
-    // }
+    } catch (e) {
+      responseMessage = "Something went wrong : ${e.toString()}";
+      _setInvoiceGenerateStatus(Status.FAILED);
+    }
     return {
       "status": invoiceGenerateStatus,
       "message": responseMessage,

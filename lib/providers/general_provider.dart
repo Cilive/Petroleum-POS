@@ -10,7 +10,7 @@ import 'package:skysoft/models/pref_data.dart';
 import 'package:skysoft/services/intercepter.dart';
 import 'package:skysoft/services/pref_services.dart';
 
-class GebneralProvider extends ChangeNotifier {
+class GeneralProvider extends ChangeNotifier {
   //
   PreferenceService prefService = PreferenceService();
   Dio dio = Dio();

@@ -200,7 +200,7 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                   print(result);
                   if (result['status'] == Status.SUCCESS) {
                     Invoice invoice = result["invoice"];
-                    Info? info = context.read<GebneralProvider>().companyInfo;
+                    Info? info = context.read<GeneralProvider>().companyInfo;
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -212,10 +212,10 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                       ),
                     );
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(result['message']),
-                      ),
+                    showResponseDialog(
+                      context: context,
+                      title: "Error",
+                      content: result['message'],
                     );
                   }
                 },

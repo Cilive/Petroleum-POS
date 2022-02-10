@@ -9,5 +9,5 @@ final List<SingleChildWidget> providers = [
   ChangeNotifierProvider(create: (_) => AuthProvider()),
   ChangeNotifierProvider(create: (_) => InvoiceProvider()),
   ChangeNotifierProvider(create: (_) => DispenserProvider()),
-  ChangeNotifierProvider(create: (_) => GebneralProvider()),
+  ChangeNotifierProvider(create: (_) => GeneralProvider()),
 ];
