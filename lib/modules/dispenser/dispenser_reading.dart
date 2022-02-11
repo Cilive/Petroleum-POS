@@ -13,6 +13,8 @@ import 'package:skysoft/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:skysoft/utils/dialogs.dart';
 import 'package:skysoft/utils/snackbars.dart';
+import 'package:skysoft/widgets/failed_widget.dart';
+import 'package:skysoft/widgets/timeout_widget.dart';
 import 'package:skysoft/widgets/titled_textfield.dart';
 
 class DispenserReadingPage extends StatefulWidget {
@@ -39,21 +41,32 @@ class _DispenserReadingPageState extends State<DispenserReadingPage> {
   @override
   void initState() {
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) async {
-      Status status = await context.read<InvoiceProvider>().getInvoiceData(
-            dispenserId: widget.dispenser!.id.toString(),
-          );
-      if (status == Status.FAILED) {
-        Navigator.pop(context);
-        ScaffoldMessenger.of(context).showSnackBar(wrongSnackBar());
-      } else if (status == Status.TIMEOUT) {
-        Navigator.pop(context);
-        ScaffoldMessenger.of(context).showSnackBar(timeoutSnackBar());
-      }
-      var prevReading =
-          context.read<InvoiceProvider>().previouseDispenserReading;
-      startReading.text = prevReading.toString();
+      await _loadInitialFunctions();
     });
     super.initState();
+  }
+
+  _loadInitialFunctions() async {
+    Status status = await context.read<InvoiceProvider>().getInvoiceData(
+          dispenserId: widget.dispenser!.id.toString(),
+        );
+    if (status == Status.FAILED) {
+      Navigator.pop(context);
+      showResponseDialog(
+        context: context,
+        title: "Error",
+        content: "Something went wrong, please try again",
+      );
+    } else if (status == Status.TIMEOUT) {
+       Navigator.pop(context);
+      showResponseDialog(
+        context: context,
+        title: "Oops",
+        content: "Session Timeout!",
+      );
+    }
+    var prevReading = context.read<InvoiceProvider>().previouseDispenserReading;
+    startReading.text = prevReading.toString();
   }
 
   @override

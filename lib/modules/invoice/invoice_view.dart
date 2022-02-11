@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:skysoft/constants/colors.dart';
+import 'package:skysoft/modules/printer/printer_list.dart';
 import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/models/fuel.dart';
 import 'package:skysoft/models/info.dart';
@@ -43,6 +44,22 @@ class ViewInvoice extends StatelessWidget {
             color: kPrimaryTextColor,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PrinterList(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.print_rounded,
+              color: kPrimaryTextColor,
+            ),
+          ),
+        ],
       ),
       floatingActionButton:
           Consumer<InvoiceProvider>(builder: (context, provider, child) {

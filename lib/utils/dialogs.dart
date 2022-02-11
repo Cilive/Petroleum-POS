@@ -11,12 +11,11 @@ showResponseDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
-    
         title: Text(
           title,
           style: const TextStyle(
             fontFamily: "OpenSans",
-            color:kPrimaryColor,
+            color: kPrimaryColor,
           ),
         ),
         content: Text(
@@ -33,7 +32,13 @@ showResponseDialog(
                 Navigator.of(context).pop();
               }
             },
-            child: const Text("OK"),
+            child: const Text(
+              "OK",
+              style: TextStyle(
+                fontFamily: "OpenSans",
+                color: kPrimaryColor,
+              ),
+            ),
           ),
         ],
       );
