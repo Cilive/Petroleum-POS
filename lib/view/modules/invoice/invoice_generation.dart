@@ -7,14 +7,14 @@ import 'package:skysoft/models/info.dart';
 import 'package:skysoft/models/invoice.dart';
 import 'package:skysoft/providers/general_provider.dart';
 import 'package:skysoft/providers/invoice_provider.dart';
-import 'package:skysoft/modules/invoice/invoice_view.dart';
+import 'package:skysoft/view/modules/invoice/invoice_view.dart';
 import 'package:skysoft/utils/enums.dart';
-import 'package:skysoft/widgets/custom_button.dart';
-import 'package:skysoft/widgets/custom_selector.dart';
-import 'package:skysoft/widgets/custom_textfield.dart';
+import 'package:skysoft/view/widgets/custom_button.dart';
+import 'package:skysoft/view/widgets/custom_selector.dart';
+import 'package:skysoft/view/widgets/custom_textfield.dart';
 import 'package:skysoft/utils/dialogs.dart';
 import 'package:skysoft/utils/snackbars.dart';
-import 'package:skysoft/widgets/titled_textfield.dart';
+import 'package:skysoft/view/widgets/titled_textfield.dart';
 import 'package:provider/provider.dart';
 
 class GenerateInvoicePage extends StatefulWidget {

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:skysoft/constants/colors.dart';
 import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
-import 'package:skysoft/modules/dispenser/dispenser_home.dart';
-import 'package:skysoft/modules/invoice/invoice_generation.dart';
-import 'package:skysoft/modules/settings/settings.dart';
-import 'package:skysoft/widgets/home_menu.dart';
+import 'package:skysoft/view/modules/dispenser/dispenser_home.dart';
+import 'package:skysoft/view/modules/invoice/invoice_generation.dart';
+import 'package:skysoft/view/modules/settings/settings.dart';
+import 'package:skysoft/view/widgets/home_menu.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {

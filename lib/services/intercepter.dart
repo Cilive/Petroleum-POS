@@ -7,7 +7,7 @@ import 'package:skysoft/services/pref_services.dart';
 class AuthIntercepter extends Interceptor {
   static bool isRetryCall = false;
   PreferenceService prefService = PreferenceService();
-  AuthProvider _authProvider = AuthProvider();
+  final AuthProvider _authProvider = AuthProvider();
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
@@ -42,7 +42,6 @@ class AuthIntercepter extends Interceptor {
       options.headers['Accept'] = "application/json";
       handler.next(options);
     }
-
   }
 
 

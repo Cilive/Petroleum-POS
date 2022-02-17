@@ -4,8 +4,8 @@ import 'package:skysoft/constants/colors.dart';
 import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
 import 'package:skysoft/utils/enums.dart';
-import 'package:skysoft/widgets/custom_button.dart';
-import 'package:skysoft/widgets/custom_textfield.dart';
+import 'package:skysoft/view/widgets/custom_button.dart';
+import 'package:skysoft/view/widgets/custom_textfield.dart';
 import 'package:skysoft/utils/dialogs.dart';
 
 class ChangePassword extends StatelessWidget {

@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:skysoft/constants/colors.dart';
 import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
-import 'package:skysoft/modules/settings/password_change.dart';
-import 'package:skysoft/modules/settings/password_forgot.dart';
-import 'package:skysoft/modules/auth/auth_login.dart';
+import 'package:skysoft/view/modules/settings/password_change.dart';
+import 'package:skysoft/view/modules/settings/password_forgot.dart';
+import 'package:skysoft/view/modules/auth/auth_login.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);

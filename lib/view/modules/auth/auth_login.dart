@@ -4,13 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:skysoft/constants/colors.dart';
 import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/providers/auth_provider.dart';
-import 'package:skysoft/modules/settings/password_forgot.dart';
-import 'package:skysoft/modules/home/home_page.dart';
+import 'package:skysoft/view/modules/settings/password_forgot.dart';
+import 'package:skysoft/view/modules/home/home_page.dart';
 import 'package:skysoft/utils/enums.dart';
-import 'package:skysoft/widgets/custom_button.dart';
-import 'package:skysoft/widgets/custom_textfield.dart';
+import 'package:skysoft/view/widgets/custom_button.dart';
+import 'package:skysoft/view/widgets/custom_textfield.dart';
 import 'package:skysoft/utils/dialogs.dart';
-import 'package:skysoft/widgets/dropdown_widget.dart';
+import 'package:skysoft/view/widgets/dropdown_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

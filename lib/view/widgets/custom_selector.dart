@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/models/fuel.dart';
 import 'package:skysoft/providers/invoice_provider.dart';
-import 'package:skysoft/widgets/selector_option.dart';
+import 'package:skysoft/view/widgets/selector_option.dart';
 import 'package:provider/provider.dart';
 
 class CustomSelector extends StatefulWidget {

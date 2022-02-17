@@ -7,15 +7,15 @@ import 'package:skysoft/models/fuel.dart';
 import 'package:skysoft/providers/dispenser_provider.dart';
 import 'package:skysoft/providers/invoice_provider.dart';
 import 'package:skysoft/utils/enums.dart';
-import 'package:skysoft/widgets/custom_button.dart';
-import 'package:skysoft/widgets/custom_selector.dart';
-import 'package:skysoft/widgets/custom_textfield.dart';
+import 'package:skysoft/view/widgets/custom_button.dart';
+import 'package:skysoft/view/widgets/custom_selector.dart';
+import 'package:skysoft/view/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:skysoft/utils/dialogs.dart';
 import 'package:skysoft/utils/snackbars.dart';
-import 'package:skysoft/widgets/failed_widget.dart';
-import 'package:skysoft/widgets/timeout_widget.dart';
-import 'package:skysoft/widgets/titled_textfield.dart';
+import 'package:skysoft/view/widgets/failed_widget.dart';
+import 'package:skysoft/view/widgets/timeout_widget.dart';
+import 'package:skysoft/view/widgets/titled_textfield.dart';
 
 class DispenserReadingPage extends StatefulWidget {
   final Dispenser? dispenser;

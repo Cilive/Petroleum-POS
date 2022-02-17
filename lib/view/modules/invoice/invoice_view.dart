@@ -5,14 +5,14 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:skysoft/constants/colors.dart';
-import 'package:skysoft/modules/printer/printer_list.dart';
+import 'package:skysoft/view/modules/printer/printer_list.dart';
 import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/models/fuel.dart';
 import 'package:skysoft/models/info.dart';
 import 'package:skysoft/models/invoice.dart';
 import 'package:skysoft/providers/invoice_provider.dart';
 import 'package:skysoft/utils/enums.dart';
-import 'package:skysoft/modules/invoice/invoice_widget.dart';
+import 'package:skysoft/view/modules/invoice/invoice_widget.dart';
 import 'package:skysoft/utils/snackbars.dart';
 
 class ViewInvoice extends StatelessWidget {

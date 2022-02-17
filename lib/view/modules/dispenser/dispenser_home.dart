@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:skysoft/constants/colors.dart';
 import 'package:skysoft/utils/config.dart';
 import 'package:skysoft/providers/dispenser_provider.dart';
-import 'package:skysoft/modules/dispenser/dispenser_reading.dart';
+import 'package:skysoft/view/modules/dispenser/dispenser_reading.dart';
 import 'package:skysoft/utils/dialogs.dart';
 import 'package:skysoft/utils/enums.dart';
-import 'package:skysoft/widgets/dispenser_menu.dart';
+import 'package:skysoft/view/widgets/dispenser_menu.dart';
 import 'package:provider/provider.dart';
 import 'package:skysoft/utils/snackbars.dart';
 
