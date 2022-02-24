@@ -22,15 +22,4 @@ class Company {
     lanNo = json['lan_no'];
     phone = json['phone'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['en_name'] = this.enName;
-    data['ar_name'] = this.arName;
-    data['vat_no'] = this.vatNo;
-    data['cr_no'] = this.crNo;
-    data['lan_no'] = this.lanNo;
-    data['phone'] = this.phone;
-    return data;
-  }
 }

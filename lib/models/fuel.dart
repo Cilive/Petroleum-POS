@@ -25,16 +25,4 @@ class Fuel {
     currentStock = json['current_stock'];
     company = json['company'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['fuel_vat'] = this.fuelVat;
-    data['rate'] = this.rate;
-    data['payable_amt'] = this.payableAmt;
-    data['current_stock'] = this.currentStock;
-    data['company'] = this.company;
-    return data;
-  }
 }

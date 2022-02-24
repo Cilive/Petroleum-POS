@@ -91,38 +91,4 @@ class Invoice {
     cash = json['cash'];
     qrCode = json['base_64_encoded'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['invoice_no'] = this.invoiceNo;
-    data['date'] = this.date;
-    data['qty'] = this.qty;
-    data['gross_amt'] = this.grossAmt;
-    data['payment_type'] = this.paymentType;
-    data['type'] = this.type;
-    data['total_amt'] = this.totalAmt;
-    data['credit_amount'] = this.creditAmount;
-    data['account_number'] = this.accountNumber;
-    data['vat_percenatge'] = this.vatPercenatge;
-    data['vat_amount'] = this.vatAmount;
-    data['paid_amt'] = this.paidAmt;
-    data['balance_amt'] = this.balanceAmt;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['exp_type'] = this.expType;
-    data['ref_no'] = this.refNo;
-    data['fuelvat_percentage'] = this.fuelvatPercentage;
-    data['session'] = this.session;
-    data['branches'] = this.branches;
-    data['contact'] = this.contact;
-    data['emp'] = this.emp;
-    data['fuel'] = this.fuel;
-    data['company'] = this.company;
-    data['vat'] = this.vat;
-    data['bank'] = this.bank;
-    data['cash'] = this.cash;
-    data['base_64_encoded'] = this.qrCode;
-    return data;
-  }
 }

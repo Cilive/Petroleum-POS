@@ -16,14 +16,4 @@ class Dispenser {
     company = json['company'];
     dispencerCount = json['dispencer_count'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['branches'] = this.branches;
-    data['company'] = this.company;
-    data['dispencer_count'] = this.dispencerCount;
-    return data;
-  }
 }

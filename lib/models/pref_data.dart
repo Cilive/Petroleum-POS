@@ -41,26 +41,6 @@ class PrefData {
         ? EmpTenantName.fromJson(json['emp_tenant_name'])
         : null;
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['refresh'] = this.refresh;
-    data['access'] = this.access;
-    data['username'] = this.username;
-    data['is_admin'] = this.isAdmin;
-    data['is_company'] = this.isCompany;
-    data['is_employee'] = this.isEmployee;
-    data['is_superuser'] = this.isSuperuser;
-    data['is_branch_user'] = this.isBranchUser;
-    data['company_id'] = this.companyId;
-    if (this.empCompanyUserId != null) {
-      data['emp_company_user_id'] = this.empCompanyUserId!.toJson();
-    }
-    if (this.empTenantName != null) {
-      data['emp_tenant_name'] = this.empTenantName!.toJson();
-    }
-    return data;
-  }
 }
 
 class EmpCompanyUserId {
@@ -71,12 +51,6 @@ class EmpCompanyUserId {
   EmpCompanyUserId.fromJson(Map<String, dynamic> json) {
     user = json['user'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['user'] = this.user;
-    return data;
-  }
 }
 
 class EmpTenantName {
@@ -86,11 +60,5 @@ class EmpTenantName {
 
   EmpTenantName.fromJson(Map<String, dynamic> json) {
     username = json['username'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['username'] = this.username;
-    return data;
   }
 }

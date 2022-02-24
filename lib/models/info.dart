@@ -26,20 +26,6 @@ class Info {
     lanNo = json['lan_no'];
     phone = json['phone'];
     company =
-        json['company'] != null ? new Company.fromJson(json['company']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['en_name'] = this.enName;
-    data['ar_name'] = this.arName;
-    data['vat_no'] = this.vatNo;
-    data['cr_no'] = this.crNo;
-    data['lan_no'] = this.lanNo;
-    data['phone'] = this.phone;
-    if (this.company != null) {
-      data['company'] = this.company!.toJson();
-    }
-    return data;
+        json['company'] != null ? Company.fromJson(json['company']) : null;
   }
 }
