@@ -219,6 +219,14 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                             _calculateAmount();
                           },
                         ),
+                        const Spacer(),
+                        Text(
+                          "Quantity : $qty Ltr",
+                          style: const TextStyle(
+                            fontFamily: "OpenSans",
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
                       ],
                     ),
               const Spacer(),
@@ -250,7 +258,8 @@ class _GenerateInvoicePageState extends State<GenerateInvoicePage> {
                     }
                     //
                     //check if quantity is entered
-                    if (qtyController.text == 0.0.toString() && amountController.text == 0.0.toString()) {
+                    if (qtyController.text == 0.0.toString() &&
+                        amountController.text == 0.0.toString()) {
                       showResponseDialog(
                         context: context,
                         title: "Error",
